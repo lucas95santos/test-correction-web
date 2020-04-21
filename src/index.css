@@ -97,6 +97,12 @@ input, textarea, select {
     font-size: 1.1rem;
     font-weight: 400;
     resize: none;
+
+    transition: all linear 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border: 2px solid var(--primary-color);
 }
 
 input, select {
@@ -116,6 +122,8 @@ button {
     margin-top: 16px;
 
     box-shadow: 0 2px 3px 0 #00000040;
+    -webkit-box-shadow: 0 2px 3px 0 #00000040;
+    -moz-box-shadow: 0 2px 3px 0 #00000040;
 
     font-size: 0.9rem;
     font-weight: 600;

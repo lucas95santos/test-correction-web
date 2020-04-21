@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // styles
 import './Navbar.css';
 // images
-import logo from '../../assets/images/logo_default.png';
+import logo from '../../assets/images/logo.png';
 import menuCollapsed from '../../assets/icons/menu_collapsed.png';
 
 export function Navbar({ color, rootLink, links }) {
@@ -26,14 +26,14 @@ export function Navbar({ color, rootLink, links }) {
                             </li>
                         ))}
                         <li className="li-button">
-                            <Link to="/signup">
+                            <Link to="/cadastro">
                                 <button type="button">
                                     Cadastre-se
                                 </button>
                             </Link>
                         </li>
                         <li className="li-button">
-                            <Link to="/signin">
+                            <Link to="/entrar">
                                 <button type="button">
                                     Entrar
                                 </button>
