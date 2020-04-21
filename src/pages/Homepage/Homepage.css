@@ -11,6 +11,7 @@ header {
 .header {
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .header-content {
@@ -214,4 +215,22 @@ section {
     height: 1px;
     margin: 0 auto;
     background-color: #dddddd;
+}
+
+.scroll-to-top {
+    border-radius: 8px;
+    background-color: rgba(216, 167, 48, 0.9);
+    padding: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 86vh;
+    left: 94vw;
+    z-index: 1000;
+
+    cursor: pointer;
+    transition: all linear 0.3s;
 }

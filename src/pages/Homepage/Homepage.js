@@ -4,7 +4,7 @@ import './Homepage.css';
 // components
 import { Navbar, Footer } from '../../components';
 // icons
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 // util
 import images from '../../util/images';
 import advantages from '../../util/advantages';
@@ -12,6 +12,7 @@ import advantages from '../../util/advantages';
 export function Homepage() {
     // state attributes
     const [navbarColor, setNavbarColor] = useState(false);
+    const [scrollTop, setScrollTop] = useState(false);
     // references
     const headerRef = useRef();
     const aboutSectionRef = useRef();
@@ -44,11 +45,16 @@ export function Homepage() {
         window.addEventListener('scroll', () => {
             const windowOffset = window.pageYOffset;
             setNavbarColor(windowOffset > 80);
+            setScrollTop(windowOffset > 700);
         })
     }, []);
 
     const scrollToSection = (section) => {
         window.scroll(0, section.current.offsetTop);
+    }
+
+    const scrollToTop = () => {
+        window.scroll(0, 0);
     }
 
     return (
@@ -164,6 +170,18 @@ export function Homepage() {
                     </div>
                 </div>
             </section>
+
+            <button
+                type="button"
+                className="scroll-to-top"
+                style={{
+                    visibility: scrollTop ? 'visible' : 'hidden',
+                    opacity: scrollTop ? 1 : 0
+                }}
+                onClick={() => scrollToTop()}
+            >
+                <FiChevronUp size={35} color="#ffffff" />
+            </button>
 
             <Footer />
         </>
