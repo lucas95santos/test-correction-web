@@ -15,24 +15,15 @@ nav {
     align-items: center;
 }
 
-.nav-content a {
-    font-family: var(--text-font);
-    font-size: 1.3rem;
-    font-weight: 400;
-    text-decoration: none !important;
-    letter-spacing: 0.5px;
-
-    cursor: pointer;
-}
-
 .nav-content-logo {
     display: flex;
     align-items: center;
 }
 
 .nav-content-logo img {
-    max-width: 150px;
+    max-width: 120px;
     margin-right: 15px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 839px) {
@@ -64,7 +55,7 @@ nav {
     align-items: center;
 }
 
-.nav-content-menu ul li a {
+.nav-content-menu ul li span {
     color: #FFFFFF;
     font-family: var(--text-font);
     font-size: 0.8rem;
@@ -105,7 +96,7 @@ nav {
 
 .nav-primary {
     background: var(--default-color);
-    box-shadow: 0 0 10px 5px rgba(17, 17, 17, 0.4);
+    box-shadow: 0 0 7px 3px rgba(17, 17, 17, 0.2);
 
     transition: all linear 0.4s;
 }

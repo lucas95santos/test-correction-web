@@ -3,30 +3,28 @@ import { Link } from 'react-router-dom';
 // styles
 import './Navbar.css';
 // images
-import logo from '../../assets/images/logo1.1.png';
+import logo from '../../assets/images/logo_default.png';
 import menuCollapsed from '../../assets/icons/menu_collapsed.png';
 
-export function Navbar({ color }) {
+export function Navbar({ color, rootLink, links }) {
     return (
         <nav class={color ? 'nav-primary' : 'nav-transparent'}>
             <div class="container nav-content">
-                <Link to="/">
-                    <div class="nav-content-logo">
-                        <img src={logo} alt="Logo" />
-                    </div>
-                </Link>
+                <div class="nav-content-logo">
+                    <img src={logo} alt="Logo" onClick={rootLink.action} />
+                </div>
 
                 <div class="nav-content-menu">
                     <ul>
-                        <li className="item-menu">
-                            <a href="#about">Sobre o sistema</a>
-                        </li>
-                        <li className="item-menu">
-                            <a href="#atuation-areas">Vantagens</a>
-                        </li>
-                        <li className="item-menu">
-                            <a href="#works">Contato</a>
-                        </li>
+                        {links.map(link => (
+                            <li className="item-menu" key={link.id}>
+                                <span
+                                    onClick={link.action}
+                                >
+                                    {link.name}
+                                </span>
+                            </li>
+                        ))}
                         <li className="li-button">
                             <Link to="/signup">
                                 <button type="button">

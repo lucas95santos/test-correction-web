@@ -88,7 +88,130 @@ header {
     filter: brightness(100%);
 }
 
+@media (max-width: 1366px) {
+    section {
+        margin-bottom: 100px;
+    }
+}
+
 section {
     width: 100%;
     height: 100vh;
+    padding-top: 100px;
+}
+
+.about-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.about-content img {
+    max-height: 60vh;
+    object-fit: cover;
+}
+
+.about-content .text {
+    flex: 0.9;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+.about-content .text p {
+    font-size: 1.1rem;
+}
+
+.about-content .text img {
+    max-height: 200px;
+    object-fit: contain;
+    margin-top: 100px;
+}
+
+.avantages-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15vh;
+}
+
+.avantages-content .content-item {
+    width: 22vw;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.avantages-content .content-item h5 {
+    font-family: var(--text-font);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.6rem;
+    color: var(--title-color);
+    letter-spacing: 0.5px;
+}
+
+.avantages-content .content-item p {
+    font-family: var(--text-font);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1rem;
+    color: var(--text-color);
+    letter-spacing: 0.5px;
+
+    margin-top: auto;
+}
+
+.avantages-content .content-item img {
+    object-fit: contain;
+    max-height: 50%;
+    margin-top: 40px;
+}
+
+.contact-form {
+    width: 100%;
+    margin-top: 60px;
+    display: flex;
+}
+
+.contact-form img {
+    max-width: 40vw;
+    object-fit: contain;
+}
+
+.contact-form form {
+    flex: 1;
+    margin-right: 32px;
+}
+
+.form-line {
+    width: 100%;
+    display: flex;
+    margin-bottom: 24px;
+}
+
+.form-line input + input {
+    margin-left: 16px;
+}
+
+.contact-form button {
+    min-width: 150px;
+    min-height: 25px;
+    background-color: var(--default-color);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 25px;
+    text-transform: uppercase;
+}
+
+.divider {
+    max-width: 88%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: #dddddd;
 }

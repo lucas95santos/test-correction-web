@@ -9,7 +9,7 @@
     --info-color: #039be5;
     --warning-color: #f9a825;
     --danger-color: #d32f2f;
-    --title-color: #333333;
+    --title-color: #444444;
     --text-color: #616161;
     --input-color: #444444;
     /* fonts */
@@ -52,6 +52,24 @@ h2 {
     font-weight: 500;
     line-height: 1.6rem;
     color: var(--title-color);
+    letter-spacing: 0.5px;
+}
+
+h3 {
+    font-family: var(--title-font);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2rem;
+    color: var(--title-color);
+    letter-spacing: 0.5px;
+}
+
+h4 {
+    font-family: var(--text-font);
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 2rem;
+    color: var(--text-color);
     letter-spacing: 0.5px;
 }
 
