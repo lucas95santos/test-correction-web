@@ -202,7 +202,7 @@ section {
 .contact-form button {
     min-width: 150px;
     min-height: 25px;
-    background-color: var(--default-color);
+    background-color: var(--primary-color);
     color: #ffffff;
     font-size: 1rem;
     font-weight: 600;
