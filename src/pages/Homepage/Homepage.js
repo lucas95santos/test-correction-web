@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import './Homepage.css';
 // components
 import { Navbar } from '../../components';
+// icons
+import { FiChevronDown } from 'react-icons/fi';
 // images
 import bgHeader from '../../assets/images/bg_header.jpg';
 
@@ -37,16 +39,14 @@ export function Homepage() {
                                         Commodi quo minus vero eveniet exercitationem quod incidunt.
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Commodi quo minus vero eveniet exercitationem quod incidunt.
-                                </h2>
+                                    </h2>
                                 </div>
-                                <button
-                                    type="button"
-                                    className="btn-homepage"
-                                >
-                                    Cadastre-se hoje
-                            </button>
                             </div>
                         </div>
+                    </div>
+                    <div className="header-footer">
+                        <span>Saiba mais</span>
+                        <FiChevronDown size={80} color="#ffffff" className="header-icon" />
                     </div>
                 </div>
             </header>
