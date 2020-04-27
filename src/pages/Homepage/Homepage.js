@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+// tooltip
+import ReactTooltip from 'react-tooltip';
 // styles
 import './Homepage.css';
 // components
@@ -179,9 +181,12 @@ export function Homepage() {
                     opacity: scrollTop ? 1 : 0
                 }}
                 onClick={() => scrollToTop()}
+                data-tip="Voltar ao topo"
             >
                 <FiChevronUp size={35} color="#ffffff" />
             </button>
+
+            <ReactTooltip place="left" type="dark" effect="solid" />
 
             <Footer />
         </>

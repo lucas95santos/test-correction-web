@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// tooltip
+import ReactTooltip from 'react-tooltip';
 // styles
 import './SignIn.css';
 // images
@@ -9,9 +11,11 @@ import signinImage from '../../assets/images/svgs/signin.svg';
 export function SignIn() {
     return (
         <div className="content">
-            <Link to="/">
+            <Link to="/" data-tip="Página inicial">
                 <img src={logoImage} alt="Logo" className="content-logo" />
             </Link>
+
+            <ReactTooltip place="bottom" type="dark" effect="solid" />
 
             <div className="content-items">
                 <div className="form-item">
