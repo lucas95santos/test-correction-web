@@ -14,12 +14,13 @@ class UserController {
       });
     }
 
-    const { id, name, email } = await User.create(request.body);
+    const { id, name, email, active } = await User.create(request.body);
 
     return response.json({
       id,
       name,
       email,
+      active,
     });
   }
 }
