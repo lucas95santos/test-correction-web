@@ -44,6 +44,11 @@ module.exports = {
     'no-underscore-dangle': 'off',
     camelCase: 'off',
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn'
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-props-no-spreading': ['error', {
+      html: "ignore",
+      custom: "ignore",
+      exceptions: [],
+    }],
   },
 };
