@@ -4,7 +4,7 @@
     /* colors */
     --default-color: #d8a730;
     --primary-color: #39374f;
-    --secondary-color: #999999;
+    --secondary-color: #dddddd;
     --success-color: #43a047;
     --info-color: #039be5;
     --warning-color: #f9a825;
@@ -102,7 +102,7 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--default-color);
 }
 
 input, select {
