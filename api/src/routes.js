@@ -9,5 +9,6 @@ const routes = new Router();
 routes.post('/users', UserController.store);
 // session route
 routes.post('/session', SessionController.store);
+// from here every route must have the authentication token
 
 export default routes;
