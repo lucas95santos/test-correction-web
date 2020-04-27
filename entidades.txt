@@ -1,0 +1,41 @@
+USER:
+
+- id
+- name
+- email
+- password
+- created_at
+- updated_at
+- status
+
+STUDENT:
+
+- name
+- registration
+- grade
+- class
+
+CLASS:
+
+- id
+- name
+
+GRADE:
+
+- id
+- name
+
+EXAM:
+
+- id
+- student_registration
+- amount_of_questions
+- correct_anwsers
+- score
+- date
+
+
+	A aplicação é um sistema que realiza a correção de provas objetivas. Ela deve permitir o cadastro de professores com as seguintes informações: nome, e-mail, senha, telefone e data de cadastro. O professor também deve ter um identificador único e um status.
+	O professor deve ser capaz de registrar os alunos que ele da aula, bem como as suas respectivas turmas e séries. O aluno deve ter um nome e uma matrícula. Para o aluno também deve ser informado uma turma e uma série.
+	 
+
