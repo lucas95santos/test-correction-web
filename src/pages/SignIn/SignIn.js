@@ -23,7 +23,7 @@ export function SignIn() {
                         <h1>Informe suas credenciais para acessar o sistema</h1>
                     </div>
                     <form onSubmit={e => e.preventDefault()}>
-                        <input type="email" placeholder="Digite seu e-mail" />
+                        <input type="email" placeholder="Digite seu e-mail" autoFocus />
                         <input type="password" placeholder="Digite sua senha" />
 
                         <div className="form-options">
