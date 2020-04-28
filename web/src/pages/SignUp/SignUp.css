@@ -24,16 +24,28 @@
 
 .form-inline {
     display: flex;
-    align-items: center;
-    margin-bottom: 16px;
+    margin-top: 16px;
 }
 
-.form-inline input + input {
+.form-inline div {
+  width: 100%;
+}
+
+.form-inline div input {
+  margin-bottom: 8px;
+}
+
+.content-form form input[type=email] {
+  margin: 16px 0 8px;
+}
+
+.content-form form span , .form-inline div span {
+  color: var(--danger-color);
+  align-self: flex-start;
+}
+
+.form-inline div + div {
     margin-left: 16px;
-}
-
-.form-inline + input {
-    margin-bottom: 16px;
 }
 
 .content-form form button {

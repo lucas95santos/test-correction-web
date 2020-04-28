@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Form, Input } from '@rocketseat/unform';
+// form validation module
+import * as Yup from 'yup';
 // tooltip
 import ReactTooltip from 'react-tooltip';
 // styles
@@ -8,36 +11,65 @@ import './SignUp.css';
 import bgSignup from '../../assets/images/svgs/bg_signup.svg';
 import logoImage from '../../assets/images/logo_alternative.png';
 
+// validation config
+const schema = Yup.object().shape({
+  firstName: Yup.string().required('O nome é obrigatório'),
+  lastName: Yup.string().required('O sobrenome é obrigatório'),
+  email: Yup.string()
+    .email('Insira um email válido')
+    .required('O e-mail é obrigatório'),
+  password: Yup.string()
+    .min(6, 'A senha precisa ter 6 caracteres no mínimo')
+    .required('A senha é obrigatória'),
+  confirmPassword: Yup.string()
+    .required('Confirme a sua senha')
+    .oneOf([Yup.ref('password')], 'As senhas devem ser iguais')
+});
+
 export function SignUp() {
-    return (
-        <div className="content" style={{ backgroundImage: `url(${bgSignup})` }}>
-            <Link to="/" data-tip="Página inicial">
-                <img src={logoImage} alt="Logo" className="content-logo" />
-            </Link>
+  const handleSubmit = data => {
+    alert(data);
+  }
 
-            <ReactTooltip place="bottom" type="dark" effect="solid" />
+  return (
+    <div className="content" style={{ backgroundImage: `url(${bgSignup})` }}>
+      <Link to="/" data-tip="Página inicial">
+        <img src={logoImage} alt="Logo" className="content-logo" />
+      </Link>
 
-            <div className="content-form">
-                <form onSubmit={e => e.preventDefault()}>
-                    <div className="form-inline">
-                        <input type="text" placeholder="Seu nome" autoFocus/>
-                        <input type="text" placeholder="Seu sobrenome" />
-                    </div>
+      <ReactTooltip place="bottom" type="dark" effect="solid" />
 
-                    <input type="email" placeholder="Seu e-mail aqui" />
-
-                    <div className="form-inline">
-                        <input type="password" placeholder="Digite uma senha" />
-                        <input type="password" placeholder="Repita a senha" />
-                    </div>
-
-                    <button type="submit">Cadastrar</button>
-                </form>
-
-                <div className="content-footer">
-                    <p>Já possui conta?&nbsp;&nbsp;<Link to="/entrar">Entrar</Link></p>
-                </div>
+      <div className="content-form">
+        <Form schema={schema} onSubmit={handleSubmit}>
+          <div className="form-inline">
+            <div>
+              <Input name="firstName" type="text" placeholder="Seu nome" autoFocus />
             </div>
+
+            <div>
+              <Input name="lastName" type="text" placeholder="Seu sobrenome" />
+            </div>
+          </div>
+
+          <Input name="email" type="email" placeholder="Seu e-mail aqui" />
+
+          <div className="form-inline">
+            <div>
+              <Input name="password" type="password" placeholder="Digite uma senha" />
+            </div>
+
+            <div>
+              <Input name="confirmPassword" type="password" placeholder="Confirme a senha" />
+            </div>
+          </div>
+
+          <button type="submit">Cadastrar</button>
+        </Form>
+
+        <div className="content-footer">
+          <p>Já possui conta?&nbsp;&nbsp;<Link to="/entrar">Entrar</Link></p>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
