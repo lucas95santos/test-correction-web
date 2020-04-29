@@ -35,7 +35,29 @@ function Dashboard(props) {
         notificationAmount={0}
       />
 
-      <div className="dashboard__content"></div>
+      <div className="dashboard__content">
+        <div className="card classes">
+          <div className="card__title">
+            <h1>Turmas</h1>
+          </div>
+        </div>
+        <div className="card students">
+          <div className="card__title">
+            <h1>Alunos</h1>
+          </div>
+        </div>
+        <div className="card tests">
+          <div className="card__title">
+            <h1>Provas</h1>
+          </div>
+        </div>
+
+        <div className="card info">
+          <div className="card__title">
+            <h1>Outros</h1>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
