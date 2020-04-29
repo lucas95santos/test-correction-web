@@ -1,5 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// actions
+import * as AuthActions from '../../store/modules/auth/actions';
+// unform
 import { Form, Input } from '@rocketseat/unform';
 // form validation module
 import * as Yup from 'yup';
@@ -13,8 +19,7 @@ import logoImage from '../../assets/images/logo_alternative.png';
 
 // validation config
 const schema = Yup.object().shape({
-  firstName: Yup.string().required('O nome é obrigatório'),
-  lastName: Yup.string().required('O sobrenome é obrigatório'),
+  name: Yup.string().required('O nome é obrigatório'),
   email: Yup.string()
     .email('Insira um email válido')
     .required('O e-mail é obrigatório'),
@@ -26,9 +31,11 @@ const schema = Yup.object().shape({
     .oneOf([Yup.ref('password')], 'As senhas devem ser iguais')
 });
 
-export function SignUp() {
-  const handleSubmit = data => {
-    alert(data);
+function SignUp(props) {
+  const { signUpRequest, loading } = props;
+
+  const handleSubmit = ({ name, email, password }) => {
+    signUpRequest(name, email, password);
   }
 
   return (
@@ -43,11 +50,7 @@ export function SignUp() {
         <Form schema={schema} onSubmit={handleSubmit}>
           <div className="form-inline">
             <div>
-              <Input name="firstName" type="text" placeholder="Seu nome" autoFocus />
-            </div>
-
-            <div>
-              <Input name="lastName" type="text" placeholder="Seu sobrenome" />
+              <Input name="name" type="text" placeholder="Seu nome completo" autoFocus />
             </div>
           </div>
 
@@ -63,7 +66,9 @@ export function SignUp() {
             </div>
           </div>
 
-          <button type="submit">Cadastrar</button>
+          <button type="submit">
+              {loading ? 'Carregando ...' : 'Cadastrar'}
+            </button>
         </Form>
 
         <div className="content-footer">
@@ -73,3 +78,13 @@ export function SignUp() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  loading: state.auth.loading
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(AuthActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

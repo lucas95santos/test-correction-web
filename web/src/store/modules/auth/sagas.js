@@ -26,13 +26,32 @@ export function* signIn({ payload }) {
     yield put(signInSuccess(token, user));
 
     history.push('/dashboard');
-    toast.success('Bem vindo, usuário!');
+    toast.success(`Bem vindo(a), ${user.name}`);
   } catch (err) {
     toast.error('Falha na autenticação, verifique suas credenciais');
     yield put(signFailure());
   }
 }
 
+export function* signUp({ payload }) {
+  try {
+    const { name, email, password } = payload;
+
+    yield call(api.post, 'users', {
+      name,
+      email,
+      password
+    });
+
+    history.push('/entrar');
+    toast.success('Cadastro realizado com sucesso');
+  } catch (err) {
+    toast.error('Falha no cadastro, verifique seus dados');
+    yield put(signFailure());
+  }
+}
+
 export default all([
-  takeLatest('@auth/SIGN_IN_REQUEST', signIn)
+  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest('@auth/SIGN_UP_REQUEST', signUp)
 ]);
