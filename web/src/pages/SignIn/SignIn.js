@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // redux
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // actions
 import * as AuthActions from '../../store/modules/auth/actions';
@@ -26,7 +26,7 @@ const schema = Yup.object().shape({
 });
 
 function SignIn(props) {
-  const { signInRequest } = props;
+  const { signInRequest, loading } = props;
 
   const handleSubmit = ({ email, password }) => {
     signInRequest(email, password);
@@ -54,7 +54,9 @@ function SignIn(props) {
               <Link to="/reset">Esqueceu sua senha?</Link>
             </div>
 
-            <button type="submit">Entrar</button>
+            <button type="submit">
+              {loading ? 'Carregando ...' : 'Entrar'}
+            </button>
           </Form>
 
           <div className="content-footer">
@@ -70,8 +72,12 @@ function SignIn(props) {
   );
 }
 
+const mapStateToProps = state => ({
+  loading: state.auth.loading
+});
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(AuthActions, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
