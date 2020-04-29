@@ -1,5 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// actions
+import * as AuthActions from '../../store/modules/auth/actions';
+// unform
 import { Form, Input } from '@rocketseat/unform';
 // form validation module
 import * as Yup from 'yup';
@@ -19,9 +25,11 @@ const schema = Yup.object().shape({
   password: Yup.string().required('A senha é obrigatória')
 });
 
-export function SignIn() {
-  const handleSubmit = data => {
-    console.log(data);
+function SignIn(props) {
+  const { signInRequest } = props;
+
+  const handleSubmit = ({ email, password }) => {
+    signInRequest(email, password);
   }
 
   return (
@@ -61,3 +69,9 @@ export function SignIn() {
     </div>
   );
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(AuthActions, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SignIn);
