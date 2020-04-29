@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// actions
+import * as AuthActions from '../../store/modules/auth/actions';
 // icons
 import {
   FiBarChart,
@@ -18,14 +23,15 @@ import './DashboardTop.css';
 // images
 import logoImage from '../../assets/images/logo_alternative.png';
 
-export function DashboardTop(props) {
+function DashboardTop(props) {
   const {
-    profileName,
+    profile,
     profileDropdownOpen,
     profileDropdownOnclose,
     notificationDropdownOpen,
     notificationDropdownOnClose,
-    notificationAmount
+    notificationAmount,
+    signOut
   } = props;
 
   return (
@@ -61,7 +67,7 @@ export function DashboardTop(props) {
           onClick={() => profileDropdownOnclose(!profileDropdownOpen)}
         >
           <FiUser size={16} color="#d8a730" style={{ marginRight: 8 }} />
-          {profileName}
+          {profile.name}
           <FiChevronDown size={16} style={{ marginLeft: 8 }} />
         </li>
       </ul>
@@ -104,14 +110,14 @@ export function DashboardTop(props) {
         }}
       >
         <Link to="/perfil">
-          <div className="dropdown__item">
+          <div className="dropdown__item" title="Acessar o seu perfil">
             <FiUser size={14} color="#d8a730" style={{ marginRight: 8 }} />
             Perfil
           </div>
         </Link>
 
         <Link to="/configuracoes">
-          <div className="dropdown__item">
+          <div className="dropdown__item" title="Acessar as configurações da conta">
             <FiSettings size={14} color="#d8a730" style={{ marginRight: 8 }} />
             Configurações da conta
           </div>
@@ -119,7 +125,11 @@ export function DashboardTop(props) {
 
         <div className="dropdown__divider" />
 
-        <div className="dropdown__item">
+        <div
+          className="dropdown__item"
+          onClick={() => signOut()}
+          title="Sair do sistema"
+        >
           <FiLogOut size={14} color="#d32f2f" style={{ marginRight: 8 }} />
           Sair
         </div>
@@ -127,3 +137,12 @@ export function DashboardTop(props) {
     </nav>
   );
 }
+
+const mapStateToProps = state => ({
+  profile: state.user.profile
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(AuthActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardTop);

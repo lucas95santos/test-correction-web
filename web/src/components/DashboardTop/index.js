@@ -1,3 +1,3 @@
-import { DashboardTop } from "./DashboardTop";
+import DashboardTop from "./DashboardTop";
 
 export default DashboardTop;
