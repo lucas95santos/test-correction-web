@@ -26,7 +26,7 @@ nav {
     cursor: pointer;
 }
 
-@media screen and (max-width: 839px) {
+@media screen and (max-width: 1031px) {
     .nav-content-menu {
         display: none;
         height: 100%;
@@ -37,7 +37,7 @@ nav {
     }
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (min-width: 1032px) {
     .nav-content-menu {
         display: block;
         height: 100%;
@@ -95,7 +95,8 @@ nav {
 }
 
 .nav-primary {
-    background: var(--default-color);
+    /* background: var(--default-color); */
+    background-image: linear-gradient(to right, #d85837, #db6c31, #dc7f2c, #db922c, #d8a530);
     box-shadow: 0 0 7px 3px rgba(17, 17, 17, 0.2);
 
     transition: all linear 0.4s;

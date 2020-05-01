@@ -13,6 +13,7 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 // util
 import images from '../../util/images';
 import advantages from '../../util/advantages';
+import testIcon from '../../assets/images/svgs/test.svg';
 
 const schema = Yup.object().shape({
   contactName: Yup.string().required('O nome é obrigatório'),
@@ -79,28 +80,28 @@ export function Homepage() {
       <header style={{ backgroundImage: `url(${images.header})` }} ref={headerRef}>
         <Navbar color={navbarColor} rootLink={rootLink} links={navbarLinks} />
 
-        <div className="header">
-          <div className="container">
-            <div className="header-content">
-              <div className="header-content-info">
-                <div>
-                  <h1>Uma solução eficiente para a correção de provas objetivas</h1>
-                  <h2>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Commodi quo minus vero eveniet exercitationem quod incidunt.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Commodi quo minus vero eveniet exercitationem quod incidunt.
+        <div className="container header">
+          <div className="header__content">
+            <div className="header__image">
+              <img src={testIcon} alt=""/>
+            </div>
+            <div className="header__info">
+              <div>
+                <h1>Uma solução eficiente para a correção de provas objetivas</h1>
+                <h2>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Commodi quo minus vero eveniet exercitationem quod incidunt.
                   </h2>
-                </div>
               </div>
             </div>
           </div>
-          <div className="header-footer">
+
+          <div className="header__footer">
             <span>Saiba mais</span>
             <FiChevronDown
               size={80}
               color="#ffffff"
-              className="header-icon"
+              className="header__icon"
               onClick={() => scrollToSection(aboutSectionRef)}
             />
           </div>
@@ -112,8 +113,8 @@ export function Homepage() {
           <h3>Sobre o sistema</h3>
           <h4>Saiba como a correção de provas funciona</h4>
 
-          <div className="about-content">
-            <div className="text">
+          <div className="about">
+            <div className="about__text">
               <p>
                 O Test Correction é um sistema que visa auxiliar os docentes no trabalho de correção de provas objetivas.
                 A principal função do sistema é reduzir o tempo que os professores levam para realizar essa atividade,
@@ -123,7 +124,9 @@ export function Homepage() {
               <img src={images.teacher} alt="Professora" />
             </div>
 
-            <img src={images.answerCard} alt="Gabarito" />
+            <div className="about__image">
+              <img src={images.answerCard} alt="Gabarito" />
+            </div>
           </div>
         </div>
       </section>
@@ -135,9 +138,9 @@ export function Homepage() {
           <h3>Vantagens</h3>
           <h4>Veja os benefícios que você terá ao utilizar o TestCorrection</h4>
 
-          <div className="avantages-content">
+          <div className="avantages">
             {advantages.map(item => (
-              <div className="content-item" key={item.id}>
+              <div className="avantages__item" key={item.id}>
                 <h5>{item.title}</h5>
                 <img src={item.image} alt={item.title} />
                 <p>{item.description}</p>
@@ -154,10 +157,10 @@ export function Homepage() {
           <h3>Entre em contato conosco</h3>
           <h4>Tire suas dúvidas ou envie uma sugestão</h4>
 
-          <div className="contact-form">
+          <div className="form">
             <Form schema={schema} onSubmit={handleSubmit}>
-              <div className="form-line">
-                <div className="form-input">
+              <div className="form__line">
+                <div className="form__input">
                   <Input
                     type="text"
                     name="contactName"
@@ -165,7 +168,7 @@ export function Homepage() {
                   />
                 </div>
 
-                <div className="form-input">
+                <div className="form__input">
                   <Input
                     type="email"
                     name="contactEmail"
@@ -174,7 +177,7 @@ export function Homepage() {
                 </div>
               </div>
 
-              <div className="form-textarea">
+              <div className="form__textarea">
                 <Input
                   name="contactMessage"
                   multiline
