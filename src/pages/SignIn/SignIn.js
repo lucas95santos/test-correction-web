@@ -14,7 +14,7 @@ import ReactTooltip from 'react-tooltip';
 // styles
 import './SignIn.css';
 // images
-import logoImage from '../../assets/images/logo_alternative.png';
+import logoImage from '../../assets/images/logo_alternative2.png';
 import signinImage from '../../assets/images/svgs/signin.svg';
 
 // validation config

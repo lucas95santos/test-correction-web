@@ -14,13 +14,13 @@ const advantages = [
     {
         id: 'statistics',
         title: 'Estatíscas de desempenho',
-        image: require('../assets/images/svgs/statistics.svg'),
+        image: require('../assets/images/svgs/chart.svg'),
         description: 'Acompanhe o desempenho dos seus alunos através estatísticas'
     },
     {
         id: 'reports',
         title: 'Relatórios detalhados',
-        image: require('../assets/images/svgs/report.svg'),
+        image: require('../assets/images/svgs/reports.svg'),
         description: 'Documente os dados de suas correções e gere relatórios em diversos formatos'
     }
 ];

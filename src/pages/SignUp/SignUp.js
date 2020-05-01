@@ -15,7 +15,7 @@ import ReactTooltip from 'react-tooltip';
 import './SignUp.css';
 // images
 import bgSignup from '../../assets/images/svgs/bg_signup.svg';
-import logoImage from '../../assets/images/logo_alternative.png';
+import logoImage from '../../assets/images/logo_alternative2.png';
 
 // validation config
 const schema = Yup.object().shape({
