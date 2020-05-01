@@ -39,6 +39,7 @@ header {
 section {
   width: 100%;
   min-height: 100vh;
+  padding: 100px 0;
 }
 
 .about {
@@ -168,10 +169,6 @@ section {
     font-weight: 500;
   }
 
-  section {
-    padding-top: 100px;
-  }
-
   .about__image {
     flex: 1;
     display: flex;
@@ -287,10 +284,6 @@ section {
     font-weight: 500;
   }
 
-  section {
-    padding-top: 100px;
-  }
-
   .about__image {
     flex: 1;
     display: flex;
@@ -403,10 +396,6 @@ section {
     font-family: var(--title-font);
     font-size: 1.4rem;
     font-weight: 500;
-  }
-
-  section {
-    padding-top: 50px;
   }
 
   .about__image {
