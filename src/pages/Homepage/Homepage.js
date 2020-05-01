@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip';
 // styles
 import './Homepage.css';
 // components
-import { Navbar, Footer } from '../../components';
+import { Navbar, MenuCollapsed, Footer } from '../../components';
 // icons
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 // util
@@ -27,6 +27,7 @@ export function Homepage() {
   // state attributes
   const [navbarColor, setNavbarColor] = useState(false);
   const [scrollTop, setScrollTop] = useState(false);
+  const [menuCollapsed, setMenuCollapsed] = useState(false);
   // references
   const headerRef = useRef();
   const aboutSectionRef = useRef();
@@ -53,7 +54,15 @@ export function Homepage() {
       name: 'Fale conosco',
       action: () => scrollToSection(contactSectionRef)
     }
-  ]
+  ];
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1032) {
+        setMenuCollapsed(false);
+      }
+    })
+  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -78,7 +87,18 @@ export function Homepage() {
   return (
     <>
       <header style={{ backgroundImage: `url(${images.header})` }} ref={headerRef}>
-        <Navbar color={navbarColor} rootLink={rootLink} links={navbarLinks} />
+        <Navbar
+          color={navbarColor}
+          rootLink={rootLink}
+          links={navbarLinks}
+          showMenuCollapsed={() => setMenuCollapsed(!menuCollapsed)}
+        />
+
+        <MenuCollapsed
+          showUp={menuCollapsed}
+          showMenu={() => setMenuCollapsed(!menuCollapsed)}
+          links={navbarLinks}
+        />
 
         <div className="container header">
           <div className="header__content">
