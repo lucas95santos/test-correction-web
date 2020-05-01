@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
@@ -33,30 +33,40 @@ const schema = Yup.object().shape({
 
 function SignUp(props) {
   const { signUpRequest, loading } = props;
+  const [background, setBackground] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setBackground(window.innerWidth >= 1032);
+    })
+  }, []);
 
   const handleSubmit = ({ name, email, password }) => {
     signUpRequest(name, email, password);
   }
 
   return (
-    <div className="content" style={{ backgroundImage: `url(${bgSignup})` }}>
+    <div
+      className="content"
+      style={{ backgroundImage: background ? `url(${bgSignup})` : null }}
+    >
       <Link to="/" data-tip="Página inicial">
-        <img src={logoImage} alt="Logo" className="content-logo" />
+        <img src={logoImage} alt="Logo" className="content__logo" />
       </Link>
 
       <ReactTooltip place="bottom" type="dark" effect="solid" />
 
-      <div className="content-form">
+      <div className="form">
         <Form schema={schema} onSubmit={handleSubmit}>
-          <div className="form-inline">
+          <div className="form__inline">
             <div>
-              <Input name="name" type="text" placeholder="Seu nome completo" autoFocus />
+              <Input name="name" type="text" placeholder="Seu nome completo" />
             </div>
           </div>
 
           <Input name="email" type="email" placeholder="Seu e-mail aqui" />
 
-          <div className="form-inline">
+          <div className="form__inline">
             <div>
               <Input name="password" type="password" placeholder="Digite uma senha" />
             </div>
@@ -71,7 +81,7 @@ function SignUp(props) {
             </button>
         </Form>
 
-        <div className="content-footer">
+        <div className="content__footer">
           <p>Já possui conta?&nbsp;&nbsp;<Link to="/entrar">Entrar</Link></p>
         </div>
       </div>

@@ -1,3 +1,62 @@
+/* behavior to large screens */
+@media screen and (min-width: 1032px) {
+  .form {
+    width: 35vw;
+    height: 55vh;
+    margin-top: 15vh;
+  }
+
+  .form__inline {
+    display: flex;
+    margin-top: 16px;
+  }
+
+  .form__inline div+div {
+    margin-left: 16px;
+  }
+}
+
+/* behavior to medium screens */
+@media screen and (min-width: 381px) and (max-width: 1031px) {
+  .form {
+    width: 55vw;
+    height: 55vh;
+    margin-top: 15vh;
+  }
+
+  .form__inline {
+    display: flex;
+    margin-top: 16px;
+  }
+
+  .form__inline div+div {
+    margin-left: 16px;
+  }
+}
+
+/* behavior to small screens */
+@media screen and (max-width: 380px) {
+  .form {
+    width: 100%;
+    height: 55vh;
+    margin-top: 0;
+  }
+
+  .form__inline {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+  }
+
+  .form__inline div+div {
+    margin-top: 16px;
+  }
+
+  .content__logo {
+    object-fit: contain;
+  }
+}
+
 .content {
   width: 100%;
   height: 100vh;
@@ -10,44 +69,24 @@
   align-items: center;
 }
 
-.content-logo {
-  max-width: 12vw;
-  object-fit: contain;
-}
-
-.content-form {
-  width: 33vw;
-  height: 55vh;
-  margin-top: 15vh;
-}
-
-.form-inline {
-  display: flex;
-  margin-top: 16px;
-}
-
-.form-inline div {
+.form__inline div {
   width: 100%;
 }
 
-.form-inline div input {
+.form__inline div input {
   margin-bottom: 8px;
 }
 
-.content-form form input[type=email] {
+.form form input[type=email] {
   margin: 16px 0 8px;
 }
 
-.content-form form span, .form-inline div span {
+.form form span, .form__inline div span {
   color: var(--danger-color);
   align-self: flex-start;
 }
 
-.form-inline div+div {
-  margin-left: 16px;
-}
-
-.content-form form button {
+.form form button {
   margin: 32px 0;
   min-width: 100%;
   min-height: 25px;
@@ -59,7 +98,7 @@
   text-transform: uppercase;
 }
 
-.content-footer {
+.content__footer {
   flex: 0.5;
   width: 100%;
   padding: 16px;
@@ -68,7 +107,7 @@
   align-items: center;
 }
 
-.content-footer a {
+.content__footer a {
   font-family: var(--text-font);
   font-size: 1.05rem;
   font-weight: 600;
@@ -79,6 +118,6 @@
   transition: all linear 0.3s;
 }
 
-.content-footer a:hover {
+.content__footer a:hover {
   filter: brightness(90%);
 }
