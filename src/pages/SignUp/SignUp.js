@@ -33,7 +33,7 @@ const schema = Yup.object().shape({
 
 function SignUp(props) {
   const { signUpRequest, loading } = props;
-  const [background, setBackground] = useState(false);
+  const [background, setBackground] = useState(window.innerWidth >= 1032);
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -56,9 +56,9 @@ function SignUp(props) {
 
       <ReactTooltip place="bottom" type="dark" effect="solid" />
 
-      <div className="form">
+      <div className="form-signup">
         <Form schema={schema} onSubmit={handleSubmit}>
-          <div className="form__inline">
+          <div className="form-signup__inline">
             <div>
               <Input name="name" type="text" placeholder="Seu nome completo" />
             </div>
@@ -66,7 +66,7 @@ function SignUp(props) {
 
           <Input name="email" type="email" placeholder="Seu e-mail aqui" />
 
-          <div className="form__inline">
+          <div className="form-signup__inline">
             <div>
               <Input name="password" type="password" placeholder="Digite uma senha" />
             </div>
@@ -81,7 +81,7 @@ function SignUp(props) {
             </button>
         </Form>
 
-        <div className="content__footer">
+        <div className="form-signup__footer">
           <p>Já possui conta?&nbsp;&nbsp;<Link to="/entrar">Entrar</Link></p>
         </div>
       </div>

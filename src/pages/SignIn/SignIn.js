@@ -41,8 +41,8 @@ function SignIn(props) {
       <ReactTooltip place="bottom" type="dark" effect="solid" />
 
       <div className="content__items">
-        <div className="form">
-          <div className="form__top">
+        <div className="form-signin">
+          <div className="form-signin__top">
             <h1>Informe suas credenciais para acessar o sistema</h1>
           </div>
 
@@ -50,7 +50,7 @@ function SignIn(props) {
             <Input name="email" type="email" placeholder="Digite seu e-mail" />
             <Input name="password" type="password" placeholder="Digite sua senha" />
 
-            <div className="form__options">
+            <div className="form-signin__options">
               <Link to="/reset">Esqueceu sua senha?</Link>
             </div>
 
@@ -59,7 +59,7 @@ function SignIn(props) {
             </button>
           </Form>
 
-          <div className="form__footer">
+          <div className="form-signin__footer">
             <p>Não possui conta?&nbsp;&nbsp;<Link to="/cadastro">Cadastre-se</Link></p>
           </div>
         </div>

@@ -1,54 +1,54 @@
 /* behavior to large screens */
 @media screen and (min-width: 1032px) {
-  .form {
+  .form-signup {
     width: 35vw;
     height: 55vh;
     margin-top: 15vh;
   }
 
-  .form__inline {
+  .form-signup__inline {
     display: flex;
     margin-top: 16px;
   }
 
-  .form__inline div+div {
+  .form-signup__inline div+div {
     margin-left: 16px;
   }
 }
 
 /* behavior to medium screens */
 @media screen and (min-width: 381px) and (max-width: 1031px) {
-  .form {
+  .form-signup {
     width: 55vw;
     height: 55vh;
     margin-top: 15vh;
   }
 
-  .form__inline {
+  .form-signup__inline {
     display: flex;
     margin-top: 16px;
   }
 
-  .form__inline div+div {
+  .form-signup__inline div+div {
     margin-left: 16px;
   }
 }
 
 /* behavior to small screens */
 @media screen and (max-width: 380px) {
-  .form {
+  .form-signup {
     width: 100%;
     height: 55vh;
     margin-top: 0;
   }
 
-  .form__inline {
+  .form-signup__inline {
     display: flex;
     flex-direction: column;
     margin-top: 16px;
   }
 
-  .form__inline div+div {
+  .form-signup__inline div+div {
     margin-top: 16px;
   }
 
@@ -69,24 +69,24 @@
   align-items: center;
 }
 
-.form__inline div {
+.form-signup__inline div {
   width: 100%;
 }
 
-.form__inline div input {
+.form-signup__inline div input {
   margin-bottom: 8px;
 }
 
-.form form input[type=email] {
+.form-signup form input[type=email] {
   margin: 16px 0 8px;
 }
 
-.form form span, .form__inline div span {
+.form-signup form span, .form-signup__inline div span {
   color: var(--danger-color);
   align-self: flex-start;
 }
 
-.form form button {
+.form-signup form button {
   margin: 32px 0;
   min-width: 100%;
   min-height: 25px;
@@ -98,7 +98,7 @@
   text-transform: uppercase;
 }
 
-.content__footer {
+.form-signup__footer {
   flex: 0.5;
   width: 100%;
   padding: 16px;
@@ -107,7 +107,7 @@
   align-items: center;
 }
 
-.content__footer a {
+.form-signup__footer a {
   font-family: var(--text-font);
   font-size: 1.05rem;
   font-weight: 600;
@@ -118,6 +118,6 @@
   transition: all linear 0.3s;
 }
 
-.content__footer a:hover {
+.form-signup__footer a:hover {
   filter: brightness(90%);
 }
