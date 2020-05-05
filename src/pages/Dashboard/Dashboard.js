@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { DashboardTop } from '../../components';
 // styles
 import './Dashboard.css';
+// icons
+import { FiPlus } from 'react-icons/fi';
+// tooltip
+import ReactTooltip from 'react-tooltip';
 
 export default function Dashboard(props) {
   const [profileDropdown, setProfileDropDown] = useState(false);
@@ -33,6 +37,13 @@ export default function Dashboard(props) {
           <div className="card__title">
             <h1>Turmas</h1>
           </div>
+          <div className="card__body">
+            <div className="card__item" data-tip="Adicionar nova turma">
+              <div className="add-sign">
+                <FiPlus size={20} color="#dc7037" />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="card students">
           <div className="card__title">
@@ -51,6 +62,8 @@ export default function Dashboard(props) {
           </div>
         </div>
       </div>
+
+      <ReactTooltip place="right" type="dark" effect="solid" />
     </div>
   );
 }

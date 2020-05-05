@@ -21,7 +21,7 @@ import {
 // styles
 import './DashboardTop.css';
 // images
-import logoImage from '../../assets/images/logo_alternative.png';
+import logoImage from '../../assets/images/logo_alternative2.png';
 
 function DashboardTop(props) {
   const {
@@ -40,13 +40,13 @@ function DashboardTop(props) {
       <ul className="menu">
         <li className="menu__item">
           <Link to="/relatorios" title="Veja os relatórios detalhados">
-            <FiFileText size={16} color="#d8a730" style={{ marginRight: 8 }} />
+            <FiFileText size={16} color="#dc7037" style={{ marginRight: 8 }} />
             Relatórios
           </Link>
         </li>
         <li className="menu__item">
           <Link to="/estatisticas" title="Acompanhes as estatísticas geradas">
-            <FiBarChart size={16} color="#d8a730" style={{ marginRight: 8 }} />
+            <FiBarChart size={16} color="#dc7037" style={{ marginRight: 8 }} />
             Estatísticas
           </Link>
         </li>
@@ -54,7 +54,7 @@ function DashboardTop(props) {
           className="menu__item"
           onClick={() => notificationDropdownOnClose(!notificationDropdownOpen)}
         >
-          <FiBell size={16} color="#d8a730" style={{ marginRight: 8 }} />
+          <FiBell size={16} color="#dc7037" style={{ marginRight: 8 }} />
           Notificações
           {
             notificationAmount > 0 ?
@@ -66,7 +66,7 @@ function DashboardTop(props) {
           className="menu__item"
           onClick={() => profileDropdownOnclose(!profileDropdownOpen)}
         >
-          <FiUser size={16} color="#d8a730" style={{ marginRight: 8 }} />
+          <FiUser size={16} color="#dc7037" style={{ marginRight: 8 }} />
           {profile.name}
           <FiChevronDown size={16} style={{ marginLeft: 8 }} />
         </li>
@@ -80,7 +80,7 @@ function DashboardTop(props) {
         }}
       >
         <div className="dropdown__item" style={{ cursor: "default" }}>
-          <FiAlertCircle size={15} color="#d8a730" style={{ marginRight: 8 }} />
+          <FiAlertCircle size={15} color="#dc7037" style={{ marginRight: 8 }} />
           Lorem, ipsum dolor sit amet consectetur adipisicing elit
           <FiXCircle
             size={13}
@@ -111,14 +111,14 @@ function DashboardTop(props) {
       >
         <Link to="/perfil">
           <div className="dropdown__item" title="Acessar o seu perfil">
-            <FiUser size={14} color="#d8a730" style={{ marginRight: 8 }} />
+            <FiUser size={14} color="#dc7037" style={{ marginRight: 8 }} />
             Perfil
           </div>
         </Link>
 
         <Link to="/configuracoes">
           <div className="dropdown__item" title="Acessar as configurações da conta">
-            <FiSettings size={14} color="#d8a730" style={{ marginRight: 8 }} />
+            <FiSettings size={14} color="#dc7037" style={{ marginRight: 8 }} />
             Configurações da conta
           </div>
         </Link>
