@@ -49,6 +49,33 @@ export default function Dashboard(props) {
           <div className="card__title">
             <h1>Alunos</h1>
           </div>
+          <div className="card__body card__body--table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Matrícula</th>
+                  <th>Série</th>
+                  <th>Turma</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td>2016.1907.013-8</td>
+                  <td>8ª</td>
+                  <td>C</td>
+                </tr>
+
+                <tr>
+                  <td>John Doe</td>
+                  <td>2016.1907.013-8</td>
+                  <td>8ª</td>
+                  <td>C</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="card tests">
           <div className="card__title">

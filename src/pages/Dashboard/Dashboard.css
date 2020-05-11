@@ -84,6 +84,37 @@
   margin-left: 0;
 }
 
+.card__body--table {
+  display: block;
+}
+
+table {
+  width: 100%;
+  border: 1px solid var(--primary-color);
+  border-spacing: 0;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+thead tr {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+tr {
+  height: 35px;
+}
+
+th, td {
+  margin: 0;
+  text-align: left;
+  padding: 8px;
+}
+
+td {
+  font-size: 0.9rem;
+}
+
 .classes {
   grid-area: classes;
 }
