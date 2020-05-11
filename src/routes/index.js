@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Route from './Route';
 // pages
-import { Homepage, SignIn, SignUp, Dashboard } from '../pages';
+import { NotFound , Homepage, SignIn, SignUp, Dashboard } from '../pages';
 
 export default function Routes() {
   return (
@@ -11,7 +11,10 @@ export default function Routes() {
       <Route path="/entrar" component={SignIn} />
       <Route path="/cadastro" component={SignUp} />
 
+      {/* private routes */}
       <Route path="/dashboard" component={Dashboard} isPrivate />
+
+      <Route path="*" component={NotFound} notFound />
     </Switch>
   );
 }
