@@ -97,6 +97,7 @@ section {
 
 .form__textarea {
   width: 100%;
+  margin-top: 12px;
 }
 
 .form__textarea textarea {
@@ -224,7 +225,7 @@ section {
   .form__line {
     width: 100%;
     display: flex;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
   }
 
   .form__input + .form__input {

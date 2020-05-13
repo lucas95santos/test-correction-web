@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Form, Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
+// services
+import api from '../../services/api';
 // form validation module
 import * as Yup from 'yup';
 // tooltip
@@ -20,6 +23,7 @@ const schema = Yup.object().shape({
   contactEmail: Yup.string()
     .email('Insira um email válido')
     .required('O e-mail é obrigatório'),
+  contactSubject: Yup.string().required('O assunto é obrigatório'),
   contactMessage: Yup.string().required('A mensagem é obrigatória')
 });
 
@@ -33,6 +37,7 @@ export function Homepage() {
   const aboutSectionRef = useRef();
   const advantagesSectionRef = useRef();
   const contactSectionRef = useRef();
+  const formRef = useRef(null);
 
   const rootLink = {
     action: () => scrollToSection(headerRef)
@@ -80,8 +85,27 @@ export function Homepage() {
     window.scroll(0, 0);
   }
 
-  const handleSubmit = data => {
-    alert(data);
+  const handleSubmit = async (data) => {
+    const mailContent = {
+      name: data.contactName,
+      email: data.contactEmail,
+      subject: data.contactSubject,
+      message: data.contactMessage
+    };
+
+    try {
+      const { data: responseData } = await api.post('/contact', mailContent);
+      toast.success(responseData.message);
+    } catch (err) {
+      toast.error('Não foi possível enviar a mensagem. Tente novamente.');
+    }
+
+    resetForm();
+  }
+
+  const resetForm = () => {
+    const contactForm = document.getElementById('contactForm');
+    contactForm.reset();
   }
 
   return (
@@ -103,7 +127,7 @@ export function Homepage() {
         <div className="container header">
           <div className="header__content">
             <div className="header__image">
-              <img src={testIcon} alt=""/>
+              <img src={testIcon} alt="" />
             </div>
             <div className="header__info">
               <div>
@@ -178,7 +202,7 @@ export function Homepage() {
           <h4>Tire suas dúvidas ou envie uma sugestão</h4>
 
           <div className="form">
-            <Form schema={schema} onSubmit={handleSubmit}>
+            <Form id="contactForm" schema={schema} onSubmit={handleSubmit}>
               <div className="form__line">
                 <div className="form__input">
                   <Input
@@ -195,6 +219,14 @@ export function Homepage() {
                     placeholder="Seu melhor e-mail"
                   />
                 </div>
+              </div>
+
+              <div className="form__input">
+                <Input
+                  type="text"
+                  name="contactSubject"
+                  placeholder="Digite o assunto da mensagem aqui"
+                />
               </div>
 
               <div className="form__textarea">
