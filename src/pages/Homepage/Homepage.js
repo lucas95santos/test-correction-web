@@ -144,8 +144,8 @@ export function Homepage() {
               <div>
                 <h1>Uma solução eficiente para a correção de provas objetivas</h1>
                 <h2>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi quo minus vero eveniet exercitationem quod incidunt.
+                  Com o TestCorrection você irá corrigir as suas provas de forma
+                  ágil e simples. Poupe seu tempo, corrija com TestCorrection.
                   </h2>
               </div>
             </div>
