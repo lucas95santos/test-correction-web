@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // components
-import { DashboardTop } from '../../components';
+import { DashboardTop, AddNewClass } from '../../components';
 // styles
 import './Dashboard.css';
 // icons
@@ -11,6 +11,7 @@ import ReactTooltip from 'react-tooltip';
 export default function Dashboard(props) {
   const [profileDropdown, setProfileDropDown] = useState(false);
   const [notificationDropdown, setNotificationDropDown] = useState(false);
+  const [addNewClassOpen, setAddNewClassOpen] = useState(false);
 
   function handleClickOut() {
     if (profileDropdown) {
@@ -38,7 +39,11 @@ export default function Dashboard(props) {
             <h1>Turmas</h1>
           </div>
           <div className="card__body">
-            <div className="card__item" data-tip="Adicionar nova turma">
+            <div
+              className="card__item"
+              data-tip="Adicionar nova turma"
+              onClick={() => setAddNewClassOpen(true)}
+            >
               <div className="add-sign">
                 <FiPlus size={20} color="#dc7037" />
               </div>
@@ -89,6 +94,11 @@ export default function Dashboard(props) {
           </div>
         </div>
       </div>
+
+      <AddNewClass
+        open={addNewClassOpen}
+        closeModal={() => setAddNewClassOpen(false)}
+      />
 
       <ReactTooltip place="right" type="dark" effect="solid" />
     </div>

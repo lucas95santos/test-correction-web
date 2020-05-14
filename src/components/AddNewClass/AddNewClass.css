@@ -1,0 +1,25 @@
+.add-new-class-content {
+  width: 100%;
+  height: 100%;
+}
+
+.add-new-class-content__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.add-new-class-content__form input, .add-new-class-content__form select {
+  margin-bottom: 16px;
+}
+
+.btn-add-new-class {
+  min-width: 100%;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 25px;
+  text-transform: uppercase;
+}
