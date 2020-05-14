@@ -5,7 +5,51 @@ footer {
   position: relative;
 }
 
-.footer-bottom {
+.footer__content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__item {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__icon {
+  cursor: pointer;
+  transition: all linear 0.2s;
+}
+
+.footer__icon svg:hover {
+  transform: scale(1.1);
+}
+
+.footer__info {
+  margin-top: 32px;
+}
+
+.footer__info a {
+  text-decoration: none;
+  color: #ffffff;
+
+  transition: all linear 0.2s;
+}
+
+.footer__info a:hover {
+  text-decoration: underline;
+}
+
+.footer__info a + a {
+  margin-left: 32px;
+}
+
+.footer__bottom {
   width: 100%;
   height: 40px;
   position: absolute;
@@ -16,7 +60,7 @@ footer {
   align-items: center;
 }
 
-.footer-bottom span {
+.footer__bottom span {
   color: #ffffff;
   font-size: 0.85rem;
 }
