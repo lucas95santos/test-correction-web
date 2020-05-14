@@ -34,9 +34,6 @@ export function Homepage() {
   const [navbarColor, setNavbarColor] = useState(false);
   const [scrollTop, setScrollTop] = useState(false);
   const [menuCollapsed, setMenuCollapsed] = useState(false);
-  const [imagesVisible, setImagesVisible] = useState([
-    true, false, false, false, false, false, false, false
-  ]);
   // references
   const headerRef = useRef();
   const aboutSectionRef = useRef();

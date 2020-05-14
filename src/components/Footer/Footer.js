@@ -18,6 +18,7 @@ export function Footer() {
               href="https://facebook.com/testcorrection"
               title="Conheça a nossa página do Facebook"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <FiFacebook size={32} color="#ffffff" />
             </a>
@@ -27,6 +28,7 @@ export function Footer() {
               href="https://instagram.com/testcorrection"
               title="Siga o nosso perfil no Instagram"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <FiInstagram size={32} color="#ffffff" />
             </a>
@@ -36,6 +38,7 @@ export function Footer() {
               href="https://twitter.com/testcorrection"
               title="Siga o nosso perfil do Twitter"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <FiTwitter size={32} color="#ffffff" />
             </a>
