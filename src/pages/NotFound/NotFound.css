@@ -21,7 +21,7 @@
 }
 
 .not-found__image {
-  max-width: 500px;
+  max-width: 40vw;
   object-fit: contain;
 }
 
