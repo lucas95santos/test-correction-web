@@ -143,8 +143,11 @@ section {
 
   .header__image img {
     max-width: 100%;
+    width: 90%;
     height: 100%;
     object-fit: contain;
+
+    transition: all linear 0.2s;
   }
 
   .header__info {
@@ -179,14 +182,20 @@ section {
 
   .about__image img {
     max-width: 100%;
+    width: 90%;
     max-height: 90%;
     object-fit: contain;
+
+    transition: all linear 0.2s;
   }
 
   .about__text img {
+    width: 100%;
     max-height: 200px;
     object-fit: contain;
     margin-top: 100px;
+
+    transition: all linear 0.2s;
   }
 
   .avantages {
@@ -207,8 +216,12 @@ section {
 
   .avantages__item img {
     object-fit: contain;
+    max-width: 100%;
+    width: 60%;
     max-height: 50%;
     margin-top: 40px;
+
+    transition: all linear 0.2s;
   }
 
   .form {
@@ -217,8 +230,12 @@ section {
     display: flex;
   }
 
-  .form img {
-    max-width: 40vw;
+  .form__image {
+    width: 40vw;
+  }
+
+  .form__image img {
+    max-width: 100%;
     object-fit: contain;
   }
 
@@ -286,16 +303,15 @@ section {
   }
 
   .about__image {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 64px;
+    display: none;
   }
 
   .about__image img {
     max-width: 100%;
     max-height: 90%;
     object-fit: contain;
+
+    transition: all linear 0.2s;
   }
 
   .about__text img {
@@ -325,6 +341,7 @@ section {
 
   .avantages__item img {
     object-fit: contain;
+    width: 20%;
     max-height: 40%;
     margin-top: 40px;
   }
@@ -334,7 +351,7 @@ section {
     margin-top: 30px;
   }
 
-  .form img {
+  .form__image {
     display: none;
   }
 
@@ -435,6 +452,7 @@ section {
 
   .avantages__item img {
     object-fit: contain;
+    width: 60%;
     max-height: 40%;
     margin-top: 40px;
   }

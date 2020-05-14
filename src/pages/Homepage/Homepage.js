@@ -7,10 +7,12 @@ import api from '../../services/api';
 import * as Yup from 'yup';
 // tooltip
 import ReactTooltip from 'react-tooltip';
+// lazy load
+import LazyLoad from 'react-lazy-load';
 // styles
 import './Homepage.css';
 // components
-import { Navbar, MenuCollapsed, Footer } from '../../components';
+import { Navbar, MenuCollapsed, Footer, ImageLoader } from '../../components';
 // icons
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 // util
@@ -32,12 +34,14 @@ export function Homepage() {
   const [navbarColor, setNavbarColor] = useState(false);
   const [scrollTop, setScrollTop] = useState(false);
   const [menuCollapsed, setMenuCollapsed] = useState(false);
+  const [imagesVisible, setImagesVisible] = useState([
+    true, false, false, false, false, false, false, false
+  ]);
   // references
   const headerRef = useRef();
   const aboutSectionRef = useRef();
   const advantagesSectionRef = useRef();
   const contactSectionRef = useRef();
-  const formRef = useRef(null);
 
   const rootLink = {
     action: () => scrollToSection(headerRef)
@@ -112,7 +116,7 @@ export function Homepage() {
     <>
       <header style={{ backgroundImage: `url(${images.header})` }} ref={headerRef}>
         <Navbar
-          color={navbarColor}
+          color={navbarColor} imagesVisible
           rootLink={rootLink}
           links={navbarLinks}
           showMenuCollapsed={() => setMenuCollapsed(!menuCollapsed)}
@@ -127,7 +131,14 @@ export function Homepage() {
         <div className="container header">
           <div className="header__content">
             <div className="header__image">
-              <img src={testIcon} alt="" />
+              <LazyLoad
+                debounce={false}
+              >
+                <ImageLoader
+                  src={testIcon}
+                  alt="Header image"
+                />
+              </LazyLoad>
             </div>
             <div className="header__info">
               <div>
@@ -165,11 +176,26 @@ export function Homepage() {
                 sem gerar erros e possibilitando um maior controle de análise sobre o desempenho de seus alunos.
               </p>
 
-              <img src={images.teacher} alt="Professora" />
+              <LazyLoad
+                debounce={false}
+              >
+                <ImageLoader
+                  src={images.teacher}
+                  alt="Professora"
+                />
+              </LazyLoad>
             </div>
 
             <div className="about__image">
-              <img src={images.answerCard} alt="Gabarito" />
+              <LazyLoad
+                debounce={false}
+                width={600}
+              >
+                <ImageLoader
+                  src={images.answerCard}
+                  alt="Gabarito"
+                />
+              </LazyLoad>
             </div>
           </div>
         </div>
@@ -183,10 +209,17 @@ export function Homepage() {
           <h4>Veja os benefícios que você terá ao utilizar o TestCorrection</h4>
 
           <div className="avantages">
-            {advantages.map(item => (
+            {advantages.map((item, index) => (
               <div className="avantages__item" key={item.id}>
                 <h5>{item.title}</h5>
-                <img src={item.image} alt={item.title} />
+                <LazyLoad
+                  debounce={false}
+                >
+                  <ImageLoader
+                    src={item.image}
+                    alt={item.title}
+                  />
+                </LazyLoad>
                 <p>{item.description}</p>
               </div>
             ))}
@@ -246,7 +279,16 @@ export function Homepage() {
               </button>
             </Form>
 
-            <img src={images.contact} alt="Contato" />
+            <div className="form__image">
+              <LazyLoad
+                debounce={false}
+              >
+                <ImageLoader
+                  src={images.contact}
+                  alt="Contato"
+                />
+              </LazyLoad>
+            </div>
           </div>
         </div>
       </section>
