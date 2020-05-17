@@ -82,12 +82,11 @@ nav {
   width: 100%;
 }
 
-.nav__collapsed img {
-  max-width: 30px;
+.nav__collapsed svg {
   cursor: pointer;
 }
 
-.nav__collapsed img:hover {
+.nav__collapsed svg:hover {
   opacity: 0.9;
 }
 

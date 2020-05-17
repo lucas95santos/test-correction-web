@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// icons
+import { FiMenu } from 'react-icons/fi';
 // styles
 import './Navbar.css';
 // images
 import logo from '../../assets/images/logo.png';
-import menuCollapsed from '../../assets/icons/menu_collapsed.png';
 
 export function Navbar({ color, rootLink, links, showMenuCollapsed }) {
   return (
@@ -46,7 +47,7 @@ export function Navbar({ color, rootLink, links, showMenuCollapsed }) {
           className="nav__collapsed"
           onClick={showMenuCollapsed}
         >
-          <img src={menuCollapsed} alt="menu_collapsed" />
+          <FiMenu size={30} color="#ffffff" />
         </div>
       </div>
     </nav>
