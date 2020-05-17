@@ -333,9 +333,8 @@ button.btn-primary:hover {
 }
 
 .btn-small {
-  padding: 2px 8px;
+  padding: 4px 10px;
   font-size: 0.8rem;
-  max-width: 100px;
 }
 
 .container {
