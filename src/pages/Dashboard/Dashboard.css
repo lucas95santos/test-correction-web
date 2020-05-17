@@ -5,28 +5,43 @@
   flex-direction: column;
 }
 
-.dashboard__content {
-  width: 95%;
+.dashboard__title {
+  width: 100%;
+  padding: 0 32px 32px;
   margin: 0 auto;
+}
+
+.dashboard__title h1 {
+  color: var(--default-color);
+  font-size: 1.5rem;
+  font-family: var(--text-font);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.dashboard__content {
+  width: 100%;
+  padding: 0 32px;
+  margin: 0 auto;
+  padding-bottom: 24px;
   flex: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 50vh 20vh;
+  grid-template-rows: 55vh 50vh;
   grid-gap: 24px;
-  grid-template-areas: "classes students tests" "info info info";
+  grid-template-areas: "exams students students" "exams classes classes";
 }
 
 .card {
   background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
 }
 
 .card__title {
   width: 100%;
   height: 40px;
   padding: 8px;
-
   display: flex;
   align-items: center;
 }
@@ -41,14 +56,13 @@
 }
 
 .card__body {
+  position: relative;
   width: 100%;
   height: calc(100% - 40px);
-
   padding: 16px;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  overflow-y: auto;
 }
 
 .card__body::-webkit-scrollbar {
@@ -61,44 +75,89 @@
 }
 
 .card__item {
-  flex-basis: 78.9px;
-  height: 80px;
-  border: 1.5px dashed var(--default-color);
+  flex-basis: 100%;
+  height: 140px;
+  padding: 8px 16px;
   border-radius: 8px;
-  margin-left: 16px;
   margin-bottom: 16px;
-
   display: flex;
-  justify-content: center;
-  align-items: center;
-
   cursor: pointer;
   transition: transform linear 0.2s;
 }
 
-.card__item:hover {
-  transform: scale(1.05);
+.card__item--exam {
+  border: 1px solid var(--secondary-color);
+  border-left: 4.5px solid var(--default-color);
 }
 
-.card__item:nth-child(5n+1) {
-  margin-left: 0;
+.card__item--add {
+  border: 1.5px dashed var(--default-color);
+  justify-content: center;
+  align-items: center;
+}
+
+.card__item--class {
+  flex-basis: calc(50% - 8px);
+}
+
+.card__item--class + .card__item--class {
+  margin-left: 16px;
+}
+
+.card__item--add:hover {
+  transform: scale(1.02);
 }
 
 .card__body--table {
   display: block;
 }
 
+.card__button {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: var(--default-color);
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+}
+
+.card__button svg {
+  margin-right: 4px;
+}
+
+.card__button--add {
+  left: 116px;
+  background: var(--primary-color);
+}
+
 table {
   width: 100%;
-  border: 1px solid var(--primary-color);
   border-spacing: 0;
+  border-collapse: collapse;
   border-radius: 4px;
   overflow: auto;
 }
 
+thead {
+  background: #ffffff;
+  border-bottom: 2px solid #cccccc;
+}
+
 thead tr {
-  background: var(--primary-color);
-  color: #ffffff;
+  color: #616161;
+}
+
+tbody::before {
+  content: "-";
+  display: block;
+  line-height: 0;
+  color: transparent;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dddddd;
 }
 
 tr {
@@ -115,6 +174,17 @@ td {
   font-size: 0.9rem;
 }
 
+.table-responsive {
+  width: 100%;
+  height: 83%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .classes {
   grid-area: classes;
 }
@@ -123,8 +193,48 @@ td {
   grid-area: students;
 }
 
-.tests {
-  grid-area: tests;
+.exams {
+  grid-area: exams;
+}
+
+.exam__title {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.exam__content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.exam__image {
+  margin-right: 16px;
+}
+
+.exam__image img {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.exam__info {
+  flex: 1;
+}
+
+.info__item {
+  color: #888888;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.2rem;
+}
+
+.info__item span {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: bold;
 }
 
 .info {
