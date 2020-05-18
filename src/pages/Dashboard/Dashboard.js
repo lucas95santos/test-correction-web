@@ -33,7 +33,7 @@ export default function Dashboard() {
       class: 'C',
       grade: '8',
       educationLevel: 'Ensino Fundamental',
-      educationLeveInitials: 'EF'
+      educationLevelInitials: 'EF'
     },
     {
       name: 'Ana Carolina',
@@ -41,7 +41,7 @@ export default function Dashboard() {
       class: 'B',
       grade: '1',
       educationLevel: 'Ensino Médio',
-      educationLeveInitials: 'EM'
+      educationLevelInitials: 'EM'
     },
     {
       name: 'Ana Carolina',
@@ -49,7 +49,7 @@ export default function Dashboard() {
       class: 'B',
       grade: '1',
       educationLevel: 'Ensino Médio',
-      educationLeveInitials: 'EM'
+      educationLevelInitials: 'EM'
     },
     {
       name: 'Ana Carolina',
@@ -57,7 +57,7 @@ export default function Dashboard() {
       class: 'B',
       grade: '1',
       educationLevel: 'Ensino Médio',
-      educationLeveInitials: 'EM'
+      educationLevelInitials: 'EM'
     },
     {
       name: 'Ana Carolina',
@@ -65,7 +65,7 @@ export default function Dashboard() {
       class: 'B',
       grade: '1',
       educationLevel: 'Ensino Médio',
-      educationLeveInitials: 'EM'
+      educationLevelInitials: 'EM'
     }
   ]
 
@@ -142,7 +142,7 @@ export default function Dashboard() {
                   <tr>
                     <th>Nome</th>
                     <th>Matrícula</th>
-                    <th className="text-center">Série</th>
+                    <th>Série</th>
                     <th className="text-center">Turma</th>
                   </tr>
                 </thead>
@@ -151,7 +151,7 @@ export default function Dashboard() {
                     <tr>
                       <td>{student.name}</td>
                       <td>{student.registration}</td>
-                      <td className="text-center">{`${student.grade}° - ${student.educationLeveInitials}`}</td>
+                      <td>{`${student.grade}° - ${student.educationLevel}`}</td>
                       <td className="text-center">{student.class.toUpperCase()}</td>
                     </tr>
                   ))}
