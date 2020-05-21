@@ -11,8 +11,8 @@ export function Modal(props) {
     switch (size) {
       case 'sm':
         return {
-          width: 300,
-          height: 260
+          width: 320,
+          height: 270
         }
       case 'md':
         return {
