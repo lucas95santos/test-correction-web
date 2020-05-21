@@ -22,21 +22,20 @@
 
 .dashboard__content {
   width: 100%;
+  height: calc(100vh - 210px);
   padding: 0 32px;
   margin: 0 auto;
-  padding-bottom: 24px;
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 55vh 50vh;
-  grid-gap: 24px;
-  grid-template-areas: "exams students students" "exams classes classes";
+  display: flex;
+  justify-content: space-between;
 }
 
 .card {
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+
+  height: 100%;
 }
 
 .card__title {
@@ -64,6 +63,8 @@
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .card__body::-webkit-scrollbar {
@@ -86,7 +87,7 @@
   transition: transform linear 0.2s;
 }
 
-.card__item--exam {
+.card__item--data {
   border: 1px solid var(--secondary-color);
   border-left: 4.5px solid var(--default-color);
 }
@@ -98,19 +99,17 @@
 }
 
 .card__item--class {
-  flex-basis: calc(50% - 8px);
+  flex-basis: calc(33% - 8px);
+  height: 113px;
+  margin-left: 16px;
 }
 
-.card__item--class + .card__item--class {
-  margin-left: 16px;
+.card__item--class:nth-child(3n + 1) {
+  margin-left: 0;
 }
 
 .card__item--add:hover {
   transform: scale(1.02);
-}
-
-.card__body--table {
-  display: block;
 }
 
 .card__button {
@@ -133,96 +132,56 @@
   background: var(--primary-color);
 }
 
-table {
-  width: 100%;
-  border-spacing: 0;
-  border-collapse: collapse;
-  border-radius: 4px;
-  overflow: auto;
-}
-
-thead {
-  background: #ffffff;
-  border-bottom: 2px solid #cccccc;
-}
-
-thead tr {
-  color: #616161;
-}
-
-tbody::before {
-  content: "-";
-  display: block;
-  line-height: 0;
-  color: transparent;
-}
-
-tbody tr {
-  border-bottom: 1px solid #dddddd;
-}
-
-tr {
-  height: 35px;
-}
-
-th, td {
-  margin: 0;
-  text-align: left;
-  padding: 8px;
-}
-
-td {
-  font-size: 0.9rem;
-}
-
-.table-responsive {
-  width: 100%;
-  height: 83%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.text-center {
-  text-align: center;
-}
-
 .classes {
-  grid-area: classes;
-}
-
-.students {
-  grid-area: students;
+  flex: 2.5;
 }
 
 .exams {
-  grid-area: exams;
+  flex: 1;
+  margin-right: 32px;
 }
 
-.exam__title {
+.data__title {
   color: var(--text-color);
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
-.exam__content {
+.data__content {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.exam__image {
+.data__image {
   margin-right: 16px;
 }
 
-.exam__image img {
+.data__image img {
   max-height: 100%;
   object-fit: contain;
 }
 
-.exam__info {
+.data__info {
   flex: 1;
+}
+
+.data__name {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+  border-radius: 8px;
+  background: var(--default-color);
+}
+
+.data__name p {
+  font-size: 2.2rem;
+  color: #ffffff;
 }
 
 .info__item {

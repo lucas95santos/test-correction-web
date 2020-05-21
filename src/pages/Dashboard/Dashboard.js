@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+// redux
+import { connect } from 'react-redux';
+// services
+import api from '../../services/api';
 // components
 import { DashboardTop, AddNewClass } from '../../components';
+// toast
+import { toast } from 'react-toastify';
 // styles
 import './Dashboard.css';
 // icons
@@ -11,7 +17,7 @@ import correctedExamSVG from '../../assets/images/svgs/corrected_exam.svg';
 // tooltip
 import ReactTooltip from 'react-tooltip';
 
-export default function Dashboard() {
+function Dashboard({ auth }) {
   const [profileDropdown, setProfileDropDown] = useState(false);
   const [notificationDropdown, setNotificationDropDown] = useState(false);
   const [addNewClassOpen, setAddNewClassOpen] = useState(false);
@@ -23,6 +29,27 @@ export default function Dashboard() {
 
     if (notificationDropdown) {
       setNotificationDropDown(false);
+    }
+  }
+
+  async function addClass({ name, grade }) {
+    try {
+      await api.post('/classes', {
+        name,
+        grade
+      },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`
+          }
+        }
+      );
+
+      setAddNewClassOpen(false);
+      toast.success('Nova turma cadastrada com sucesso');
+    } catch (err) {
+      console.log(err);
+      toast.error('Turma já cadastrada');
     }
   }
 
@@ -67,7 +94,7 @@ export default function Dashboard() {
       educationLevel: 'Ensino Médio',
       educationLevelInitials: 'EM'
     }
-  ]
+  ];
 
   return (
     <div className="dashboard" onClick={() => handleClickOut()}>
@@ -90,32 +117,32 @@ export default function Dashboard() {
           </div>
           <div className="card__body">
             <div
-              className="card__item card__item--exam"
+              className="card__item card__item--data"
             >
-              <div className="exam__content">
-                <div className="exam__image">
-                  <img src={correctedExamSVG} alt="Exam"/>
+              <div className="data__content">
+                <div className="data__image">
+                  <img src={correctedExamSVG} alt="Exam" />
                 </div>
-                <div className="exam__info">
-                  <p className="exam__title">Prova 1</p>
+                <div className="data__info">
+                  <p className="data__title">Prova 1</p>
                   <p className="info__item"><span>Quantidade de questões: </span> 10</p>
-                  <p className="info__item"><span>Quantidade de alunos: </span> 30</p>
+                  <p className="info__item"><span>Alunos participantes: </span> 30</p>
                   <p className="info__item"><span>Data de aplicação: </span> 03/05/2020</p>
                   <p className="info__item"><span>Situação: </span>Corrigida</p>
                 </div>
               </div>
             </div>
             <div
-              className="card__item card__item--exam"
+              className="card__item card__item--data"
             >
-              <div className="exam__content">
-                <div className="exam__image">
-                  <img src={examSVG} alt="Exam"/>
+              <div className="data__content">
+                <div className="data__image">
+                  <img src={examSVG} alt="Exam" />
                 </div>
-                <div className="exam__info">
-                  <p className="exam__title">Prova 2</p>
+                <div className="data__info">
+                  <p className="data__title">Prova 2</p>
                   <p className="info__item"><span>Quantidade de questões: </span> 10</p>
-                  <p className="info__item"><span>Quantidade de alunos: </span> 30</p>
+                  <p className="info__item"><span>Alunos participantes: </span> 30</p>
                   <p className="info__item"><span>Data de aplicação: </span> 03/05/2020</p>
                   <p className="info__item"><span>Situação: </span>Aguardando correção</p>
                 </div>
@@ -131,50 +158,41 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="card students">
-          <div className="card__title">
-            <h1>Alunos</h1>
-          </div>
-          <div className="card__body card__body--table">
-            <div className="table-responsive">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Matrícula</th>
-                    <th>Série</th>
-                    <th className="text-center">Turma</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {students.map(student => (
-                    <tr>
-                      <td>{student.name}</td>
-                      <td>{student.registration}</td>
-                      <td>{`${student.grade}° - ${student.educationLevel}`}</td>
-                      <td className="text-center">{student.class.toUpperCase()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <button type="button" className="card__button btn-small">
-              <FaPlus size={12} />
-              Ver todos
-            </button>
-
-            <button type="button" className="card__button card__button--add btn-small">
-              <FaUserGraduate size={13} />
-              Adicionar aluno
-            </button>
-          </div>
-        </div>
         <div className="card classes">
           <div className="card__title">
             <h1>Turmas</h1>
           </div>
           <div className="card__body">
+            <div
+              className="card__item card__item--data card__item--class"
+            >
+              <div className="data__content">
+                <div className="data__name">
+                  <p>B</p>
+                </div>
+                <div className="data__info">
+                  <p className="info__item"><span>Ano: </span> 3°</p>
+                  <p className="info__item"><span>Ensino: </span> Médio</p>
+                  <p className="info__item"><span>Criada em: </span> 03/05/2020</p>
+                  <p className="info__item"><span>Quantidade de alunos: </span>30</p>
+                </div>
+              </div>
+            </div>
+            <div
+              className="card__item card__item--data card__item--class"
+            >
+              <div className="data__content">
+                <div className="data__name">
+                  <p>C</p>
+                </div>
+                <div className="data__info">
+                  <p className="info__item"><span>Ano: </span> 8°</p>
+                  <p className="info__item"><span>Ensino: </span> Fundamental</p>
+                  <p className="info__item"><span>Criada em: </span> 03/05/2020</p>
+                  <p className="info__item"><span>Quantidade de alunos: </span>40</p>
+                </div>
+              </div>
+            </div>
             <div
               className="card__item card__item--add card__item--class"
               data-tip="Adicionar nova turma"
@@ -191,9 +209,16 @@ export default function Dashboard() {
       <AddNewClass
         open={addNewClassOpen}
         closeModal={() => setAddNewClassOpen(false)}
+        addClass={addClass}
       />
 
       <ReactTooltip place="bottom" type="dark" effect="solid" />
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(Dashboard);
