@@ -169,8 +169,8 @@
 }
 
 .data__name {
-  width: 80px;
-  height: 80px;
+  width: 5vw;
+  height: 5vw;
   display: flex;
   justify-content: center;
   align-items: center;

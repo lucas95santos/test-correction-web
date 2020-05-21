@@ -125,9 +125,9 @@ function Dashboard({ auth }) {
                 </div>
                 <div className="data__info">
                   <p className="data__title">Prova 1</p>
-                  <p className="info__item"><span>Quantidade de questões: </span> 10</p>
+                  <p className="info__item"><span>Número de questões: </span> 10</p>
                   <p className="info__item"><span>Alunos participantes: </span> 30</p>
-                  <p className="info__item"><span>Data de aplicação: </span> 03/05/2020</p>
+                  <p className="info__item"><span>Aplicado em: </span> 03/05/2020</p>
                   <p className="info__item"><span>Situação: </span>Corrigida</p>
                 </div>
               </div>
@@ -141,10 +141,10 @@ function Dashboard({ auth }) {
                 </div>
                 <div className="data__info">
                   <p className="data__title">Prova 2</p>
-                  <p className="info__item"><span>Quantidade de questões: </span> 10</p>
+                  <p className="info__item"><span>Número de questões: </span> 10</p>
                   <p className="info__item"><span>Alunos participantes: </span> 30</p>
-                  <p className="info__item"><span>Data de aplicação: </span> 03/05/2020</p>
-                  <p className="info__item"><span>Situação: </span>Aguardando correção</p>
+                  <p className="info__item"><span>Aplicado em: </span> 03/05/2020</p>
+                  <p className="info__item"><span>Situação: </span>Pendente</p>
                 </div>
               </div>
             </div>
@@ -174,7 +174,7 @@ function Dashboard({ auth }) {
                   <p className="info__item"><span>Ano: </span> 3°</p>
                   <p className="info__item"><span>Ensino: </span> Médio</p>
                   <p className="info__item"><span>Criada em: </span> 03/05/2020</p>
-                  <p className="info__item"><span>Quantidade de alunos: </span>30</p>
+                  <p className="info__item"><span>Número de alunos: </span>30</p>
                 </div>
               </div>
             </div>
@@ -189,7 +189,7 @@ function Dashboard({ auth }) {
                   <p className="info__item"><span>Ano: </span> 8°</p>
                   <p className="info__item"><span>Ensino: </span> Fundamental</p>
                   <p className="info__item"><span>Criada em: </span> 03/05/2020</p>
-                  <p className="info__item"><span>Quantidade de alunos: </span>40</p>
+                  <p className="info__item"><span>Número de alunos: </span>40</p>
                 </div>
               </div>
             </div>
