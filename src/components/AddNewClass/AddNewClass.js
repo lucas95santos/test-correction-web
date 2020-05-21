@@ -93,37 +93,37 @@ export function AddNewClass(props) {
             onChange={e => setGrade(e.target.value)}
           >
             <option value="null">Escolha um ano</option>
-            <option value="1° ano - Ensino Fundamental">
+            <option value="1°-Ensino Fundamental">
               1° ano - Ensino Fundamental
             </option>
-            <option value="2° ano - Ensino Fundamental">
+            <option value="2°-Ensino Fundamental">
               2° ano - Ensino Fundamental
             </option>
-            <option value="3° ano - Ensino Fundamental">
+            <option value="3°-Ensino Fundamental">
               3° ano - Ensino Fundamental
             </option>
-            <option value="4° ano - Ensino Fundamental">
+            <option value="4°-Ensino Fundamental">
               4° ano - Ensino Fundamental
             </option>
-            <option value="5° ano - Ensino Fundamental">
+            <option value="5°-Ensino Fundamental">
               5° ano - Ensino Fundamental
             </option>
-            <option value="6° ano - Ensino Fundamental">
+            <option value="6°-Ensino Fundamental">
               6° ano - Ensino Fundamental
             </option>
-            <option value="7° ano - Ensino Fundamental">
+            <option value="7°-Ensino Fundamental">
               7° ano - Ensino Fundamental
             </option>
-            <option value="8° ano - Ensino Fundamental">
+            <option value="8°-Ensino Fundamental">
               8° ano - Ensino Fundamental
             </option>
-            <option value="1° ano - Ensino Médio">
+            <option value="1°-Ensino Médio">
               1° ano - Ensino Médio
             </option>
-            <option value="2° ano - Ensino Médio">
+            <option value="2°-Ensino Médio">
               2° ano - Ensino Médio
             </option>
-            <option value="3° ano - Ensino Médio">
+            <option value="3°-Ensino Médio">
               3° ano - Ensino Médio
             </option>
           </select>

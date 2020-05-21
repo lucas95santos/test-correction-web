@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// actions
+import * as SchoolClassActions from '../../store/modules/schoolClass/actions';
 // services
 import api from '../../services/api';
 // components
@@ -10,17 +13,23 @@ import { toast } from 'react-toastify';
 // styles
 import './Dashboard.css';
 // icons
-import { FaPlus, FaUserGraduate } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 // images
 import examSVG from '../../assets/images/svgs/exam.svg';
 import correctedExamSVG from '../../assets/images/svgs/corrected_exam.svg';
 // tooltip
 import ReactTooltip from 'react-tooltip';
 
-function Dashboard({ auth }) {
+function Dashboard(props) {
+  const { auth, schoolClasses, listAllRequest } = props;
+
   const [profileDropdown, setProfileDropDown] = useState(false);
   const [notificationDropdown, setNotificationDropDown] = useState(false);
   const [addNewClassOpen, setAddNewClassOpen] = useState(false);
+
+  useEffect(() => {
+    listAllRequest(auth.token);
+  }, []);
 
   function handleClickOut() {
     if (profileDropdown) {
@@ -47,54 +56,19 @@ function Dashboard({ auth }) {
 
       setAddNewClassOpen(false);
       toast.success('Nova turma cadastrada com sucesso');
+      listAllRequest(auth.token);
     } catch (err) {
       console.log(err);
       toast.error('Turma já cadastrada');
     }
   }
 
-  const students = [
-    {
-      name: 'João Carlos',
-      registration: '2016.1907.013-8',
-      class: 'C',
-      grade: '8',
-      educationLevel: 'Ensino Fundamental',
-      educationLevelInitials: 'EF'
-    },
-    {
-      name: 'Ana Carolina',
-      registration: '2016.1998.033-4',
-      class: 'B',
-      grade: '1',
-      educationLevel: 'Ensino Médio',
-      educationLevelInitials: 'EM'
-    },
-    {
-      name: 'Ana Carolina',
-      registration: '2016.1998.033-4',
-      class: 'B',
-      grade: '1',
-      educationLevel: 'Ensino Médio',
-      educationLevelInitials: 'EM'
-    },
-    {
-      name: 'Ana Carolina',
-      registration: '2016.1998.033-4',
-      class: 'B',
-      grade: '1',
-      educationLevel: 'Ensino Médio',
-      educationLevelInitials: 'EM'
-    },
-    {
-      name: 'Ana Carolina',
-      registration: '2016.1998.033-4',
-      class: 'B',
-      grade: '1',
-      educationLevel: 'Ensino Médio',
-      educationLevelInitials: 'EM'
-    }
-  ];
+  function formatGrade(grade) {
+    const newFormat = grade.split('-');
+    newFormat[1] = newFormat[1].replace('Ensino', '');
+
+    return newFormat;
+  }
 
   return (
     <div className="dashboard" onClick={() => handleClickOut()}>
@@ -163,36 +137,29 @@ function Dashboard({ auth }) {
             <h1>Turmas</h1>
           </div>
           <div className="card__body">
-            <div
-              className="card__item card__item--data card__item--class"
-            >
-              <div className="data__content">
-                <div className="data__name">
-                  <p>B</p>
+            {schoolClasses.map((schoolClass, index) => {
+              const [gradeYear, gradeEducation] = formatGrade(schoolClass.grade);
+              const createdAt = new Date(schoolClass.createdAt).toLocaleDateString();
+
+              return (
+                <div
+                  key={index}
+                  className="card__item card__item--data card__item--class"
+                >
+                  <div className="data__content">
+                    <div className="data__name">
+                      <p>{schoolClass.name}</p>
+                    </div>
+                    <div className="data__info">
+                      <p className="info__item"><span>Ano: </span> {gradeYear}</p>
+                      <p className="info__item"><span>Ensino: </span> {gradeEducation}</p>
+                      <p className="info__item"><span>Criada em: </span> {createdAt}</p>
+                      <p className="info__item"><span>Número de alunos: </span>0</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="data__info">
-                  <p className="info__item"><span>Ano: </span> 3°</p>
-                  <p className="info__item"><span>Ensino: </span> Médio</p>
-                  <p className="info__item"><span>Criada em: </span> 03/05/2020</p>
-                  <p className="info__item"><span>Número de alunos: </span>30</p>
-                </div>
-              </div>
-            </div>
-            <div
-              className="card__item card__item--data card__item--class"
-            >
-              <div className="data__content">
-                <div className="data__name">
-                  <p>C</p>
-                </div>
-                <div className="data__info">
-                  <p className="info__item"><span>Ano: </span> 8°</p>
-                  <p className="info__item"><span>Ensino: </span> Fundamental</p>
-                  <p className="info__item"><span>Criada em: </span> 03/05/2020</p>
-                  <p className="info__item"><span>Número de alunos: </span>40</p>
-                </div>
-              </div>
-            </div>
+              );
+            })}
             <div
               className="card__item card__item--add card__item--class"
               data-tip="Adicionar nova turma"
@@ -218,7 +185,12 @@ function Dashboard({ auth }) {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  schoolClasses: state.schoolClass.data
 });
 
-export default connect(mapStateToProps, null)(Dashboard);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(SchoolClassActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
