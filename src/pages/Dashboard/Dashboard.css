@@ -176,7 +176,6 @@
   align-items: center;
   margin-right: 16px;
   border-radius: 8px;
-  background: var(--default-color);
 }
 
 .data__name p {

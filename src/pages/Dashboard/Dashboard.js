@@ -19,6 +19,8 @@ import examSVG from '../../assets/images/svgs/exam.svg';
 import correctedExamSVG from '../../assets/images/svgs/corrected_exam.svg';
 // tooltip
 import ReactTooltip from 'react-tooltip';
+// util
+import gradeColors from '../../util/gradeColors';
 
 function Dashboard(props) {
   const { auth, schoolClasses, listAllRequest } = props;
@@ -68,6 +70,18 @@ function Dashboard(props) {
     newFormat[1] = newFormat[1].replace('Ensino', '');
 
     return newFormat;
+  }
+
+  function getGradeColor(grade) {
+    let gradeColor = null;
+
+    gradeColors.forEach(item => {
+      if (grade === item.key) {
+        gradeColor = item.color;
+      }
+    });
+
+    return gradeColor;
   }
 
   return (
@@ -147,7 +161,7 @@ function Dashboard(props) {
                   className="card__item card__item--data card__item--class"
                 >
                   <div className="data__content">
-                    <div className="data__name">
+                    <div className="data__name" style={{ background: getGradeColor(schoolClass.grade) }}>
                       <p>{schoolClass.name}</p>
                     </div>
                     <div className="data__info">
