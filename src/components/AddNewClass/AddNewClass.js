@@ -20,7 +20,7 @@ export function AddNewClass(props) {
     let inputErrors = [];
 
     if (!isEmpty(name) && !isEmpty(grade)) {
-      addClass({ event, name, grade });
+      addClass({ name, grade });
 
       setErrors([]);
       clearForm();
@@ -73,6 +73,7 @@ export function AddNewClass(props) {
           id="addClassForm"
           className="add-new-class-content__form"
           onSubmit={event => handleSubmit(event)}
+          autoComplete="off"
         >
           <input
             type="text"

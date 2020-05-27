@@ -17,7 +17,7 @@ export function Modal(props) {
       case 'md':
         return {
           width: 400,
-          height: 500
+          height: 350
         }
       case 'lg':
         return {

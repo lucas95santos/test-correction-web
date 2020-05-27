@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 // redux
 import { connect } from 'react-redux';
 // components
-import { DashboardTop } from '../../components';
+import { DashboardTop, AddNewStudent } from '../../components';
+// toast
+import { toast } from 'react-toastify';
 // services
 import api from '../../services/api';
 import history from '../../services/history';
 // icons
-import { FiPlus, FiX, FiMail, FiEdit } from 'react-icons/fi';
+import { FiPlus, FiX, FiMail, FiEdit, FiArrowLeft } from 'react-icons/fi';
 // styles
 import './SchoolClass.css';
 // util
@@ -17,6 +19,7 @@ function SchoolClass({ auth }) {
   const [profileDropdown, setProfileDropDown] = useState(false);
   const [notificationDropdown, setNotificationDropDown] = useState(false);
   const [schoolClass, setSchoolClass] = useState(null);
+  const [addNewStudentOpen, setAddNewStudentOpen] = useState(false);
 
   const { pathname } = history.location;
 
@@ -58,6 +61,30 @@ function SchoolClass({ auth }) {
     return schoolClass.grade.replace('-', ' ano do ');
   }
 
+  async function addStudent({ registration, name, email }) {
+    try {
+      await api.post('/students', {
+        registration,
+        name,
+        email: email !== "" ? email : null,
+        SchoolClassId: schoolClass.id
+      },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`
+          }
+        }
+      );
+
+      setAddNewStudentOpen(false);
+      toast.success('Nova aluno cadastrado com sucesso');
+      loadSchoolClass();
+    } catch (err) {
+      console.log(err);
+      toast.error('Erro ao cadastrar aluno');
+    }
+  }
+
   if (!schoolClass) return null;
 
   return (
@@ -70,6 +97,15 @@ function SchoolClass({ auth }) {
         notificationAmount={0}
       />
 
+      <div
+        className="go-back"
+        title="Voltar para a página anterior"
+        onClick={() => history.goBack()}
+      >
+        <FiArrowLeft size={18} color="#dc7037" />
+        <span>Voltar</span>
+      </div>
+
       <div className="school-class__title">
         <div>
           <h1>{`Turma ${schoolClass.name} - ${formatGrade()}`}</h1>
@@ -80,7 +116,7 @@ function SchoolClass({ auth }) {
         </div>
         <div>
           <p><span>Números de alunos matriculados:</span> {schoolClass.amount_students}</p>
-          <p><span>Criada em:</span> 22/05/2020</p>
+          <p><span>Criada em:</span> {new Date(schoolClass.createdAt).toLocaleDateString()}</p>
         </div>
       </div>
 
@@ -118,11 +154,21 @@ function SchoolClass({ auth }) {
             </table>
           </div>
         )}
-        <button type="button" className="school-class__add-button btn-success">
+        <button
+          type="button"
+          className="school-class__add-button btn-success"
+          onClick={() => setAddNewStudentOpen(true)}
+        >
           <FiPlus size={16} />
           Cadastrar novo aluno
         </button>
       </div>
+
+      <AddNewStudent
+        open={addNewStudentOpen}
+        closeModal={() => setAddNewStudentOpen(false)}
+        addStudent={addStudent}
+      />
     </div>
   );
 }

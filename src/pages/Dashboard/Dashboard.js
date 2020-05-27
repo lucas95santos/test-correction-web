@@ -32,7 +32,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     listAllRequest(auth.token);
-  }, []);
+  });
 
   function handleClickOut() {
     if (profileDropdown) {

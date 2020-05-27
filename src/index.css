@@ -194,6 +194,14 @@ textarea {
   padding: 14px;
 }
 
+.input-error {
+  color: var(--danger-color);
+  font-size: 0.750rem;
+
+  margin-top: -14px;
+  margin-bottom: 8px;
+}
+
 button {
   padding: 6px 16px;
   border: 2px solid transparent;

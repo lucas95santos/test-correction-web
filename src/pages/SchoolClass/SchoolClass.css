@@ -125,3 +125,21 @@ td {
 .school-class__add-button svg {
   margin-right: 8px;
 }
+
+.go-back {
+  width: 200px;
+  padding: 0 32px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.go-back span {
+  margin-left: 8px;
+  color: var(--default-color);
+  cursor: pointer;
+  transition: all linear 0.2s;
+}
+
+.go-back span:hover {
+  text-decoration: underline;
+}

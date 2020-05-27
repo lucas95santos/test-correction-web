@@ -5,6 +5,7 @@
 
 .add-new-class-content__form {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,6 +16,7 @@
 }
 
 .btn-add-new-class {
+  margin-top: auto;
   min-width: 100%;
   background-color: var(--primary-color);
   color: #ffffff;
@@ -22,12 +24,4 @@
   font-weight: 600;
   line-height: 25px;
   text-transform: uppercase;
-}
-
-.input-error {
-  color: var(--danger-color);
-  font-size: 0.750rem;
-
-  margin-top: -14px;
-  margin-bottom: 8px;
 }

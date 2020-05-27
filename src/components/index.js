@@ -4,6 +4,7 @@ import Footer from './Footer';
 import DashboardTop from './DashboardTop';
 import ImageLoader from './ImageLoader';
 import AddNewClass from './AddNewClass';
+import AddNewStudent from './AddNewStudent';
 
 export {
   Navbar,
@@ -11,5 +12,6 @@ export {
   Footer,
   DashboardTop,
   ImageLoader,
-  AddNewClass
+  AddNewClass,
+  AddNewStudent
 };
