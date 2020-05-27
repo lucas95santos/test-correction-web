@@ -45,4 +45,14 @@ const gradeColors = [
   }
 ];
 
-export default gradeColors;
+export function getGradeColor(grade) {
+  let gradeColor = null;
+
+  gradeColors.forEach(item => {
+    if (grade === item.key) {
+      gradeColor = item.color;
+    }
+  });
+
+  return gradeColor;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,7 +21,7 @@ import correctedExamSVG from '../../assets/images/svgs/corrected_exam.svg';
 // tooltip
 import ReactTooltip from 'react-tooltip';
 // util
-import gradeColors from '../../util/gradeColors';
+import { getGradeColor } from '../../util/gradeColors';
 
 function Dashboard(props) {
   const { auth, schoolClasses, listAllRequest } = props;
@@ -46,6 +47,7 @@ function Dashboard(props) {
   async function addClass({ name, grade }) {
     try {
       await api.post('/classes', {
+        id: createSchoolClassId(name, grade),
         name,
         grade
       },
@@ -65,23 +67,16 @@ function Dashboard(props) {
     }
   }
 
+  function createSchoolClassId(name, grade) {
+    grade = grade.replace('é', 'e');
+    return `${name}_${grade.replace(' ', '')}`;
+  }
+
   function formatGrade(grade) {
     const newFormat = grade.split('-');
     newFormat[1] = newFormat[1].replace('Ensino', '');
 
     return newFormat;
-  }
-
-  function getGradeColor(grade) {
-    let gradeColor = null;
-
-    gradeColors.forEach(item => {
-      if (grade === item.key) {
-        gradeColor = item.color;
-      }
-    });
-
-    return gradeColor;
   }
 
   return (
@@ -151,27 +146,32 @@ function Dashboard(props) {
             <h1>Turmas</h1>
           </div>
           <div className="card__body">
-            {schoolClasses.map((schoolClass, index) => {
+            {schoolClasses.map(schoolClass => {
               const [gradeYear, gradeEducation] = formatGrade(schoolClass.grade);
               const createdAt = new Date(schoolClass.createdAt).toLocaleDateString();
+              let grade = schoolClass.grade.replace('é', 'e');
+              grade = grade.replace(' ', '');
 
               return (
-                <div
-                  key={index}
+                <Link
+                  key={schoolClass.id}
+                  to={`/turmas/${grade}/${schoolClass.name}`}
                   className="card__item card__item--data card__item--class"
                 >
-                  <div className="data__content">
-                    <div className="data__name" style={{ background: getGradeColor(schoolClass.grade) }}>
-                      <p>{schoolClass.name}</p>
-                    </div>
-                    <div className="data__info">
-                      <p className="info__item"><span>Ano: </span> {gradeYear}</p>
-                      <p className="info__item"><span>Ensino: </span> {gradeEducation}</p>
-                      <p className="info__item"><span>Criada em: </span> {createdAt}</p>
-                      <p className="info__item"><span>Número de alunos: </span>0</p>
+                  <div>
+                    <div className="data__content">
+                      <div className="data__name" style={{ background: getGradeColor(schoolClass.grade) }}>
+                        <p>{schoolClass.name}</p>
+                      </div>
+                      <div className="data__info">
+                        <p className="info__item"><span>Ano: </span> {gradeYear}</p>
+                        <p className="info__item"><span>Ensino: </span> {gradeEducation}</p>
+                        <p className="info__item"><span>Criada em: </span> {createdAt}</p>
+                        <p className="info__item"><span>Número de alunos: </span>{schoolClass.amount_students}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
             <div

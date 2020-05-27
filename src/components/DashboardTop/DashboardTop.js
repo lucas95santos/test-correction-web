@@ -36,7 +36,9 @@ function DashboardTop(props) {
 
   return (
     <nav className="dashboard__top">
-      <img src={logoImage} alt="Logo" className="dashboard__logo" />
+      <Link to="/" title="Ir para o painel de controle">
+        <img src={logoImage} alt="Logo" className="dashboard__logo" />
+      </Link>
       <ul className="menu">
         <li className="menu__item">
           <Link to="/relatorios" title="Veja os relatórios detalhados">
