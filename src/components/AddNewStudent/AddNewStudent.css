@@ -1,0 +1,27 @@
+.add-new-student-content {
+  width: 100%;
+  height: 100%;
+}
+
+.add-new-student-content__form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.add-new-student-content__form input {
+  margin-bottom: 16px;
+}
+
+.btn-add-new-student {
+  margin-top: auto;
+  min-width: 100%;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 25px;
+  text-transform: uppercase;
+}
