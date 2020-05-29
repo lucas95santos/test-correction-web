@@ -8,7 +8,7 @@ import * as SchoolClassActions from '../../store/modules/schoolClass/actions';
 // services
 import api from '../../services/api';
 // components
-import { DashboardTop, AddNewClass } from '../../components';
+import { DashboardTop, AddNewClass, AddNewExam } from '../../components';
 // toast
 import { toast } from 'react-toastify';
 // styles
@@ -29,10 +29,11 @@ function Dashboard(props) {
   const [profileDropdown, setProfileDropDown] = useState(false);
   const [notificationDropdown, setNotificationDropDown] = useState(false);
   const [addNewClassOpen, setAddNewClassOpen] = useState(false);
+  const [addNewExamOpen, setAddNewExamOpen] = useState(true);
 
   useEffect(() => {
     listAllRequest(auth.token);
-  });
+  }, []);
 
   function handleClickOut() {
     if (profileDropdown) {
@@ -134,6 +135,7 @@ function Dashboard(props) {
             <div
               className="card__item card__item--add"
               data-tip="Adicionar nova prova"
+              onClick={() => setAddNewExamOpen(true)}
             >
               <div className="add-sign">
                 <FaPlus size={18} color="#dc7037" />
@@ -186,6 +188,11 @@ function Dashboard(props) {
           </div>
         </div>
       </div>
+
+      <AddNewExam
+        open={addNewExamOpen}
+        closeModal={() => setAddNewExamOpen(false)}
+      />
 
       <AddNewClass
         open={addNewClassOpen}

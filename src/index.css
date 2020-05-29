@@ -192,6 +192,7 @@ input, select {
 
 textarea {
   padding: 14px;
+  resize: none;
 }
 
 .input-error {
@@ -343,6 +344,13 @@ button.btn-primary:hover {
 .btn-small {
   padding: 4px 10px;
   font-size: 0.8rem;
+}
+
+.btn--disabled, .btn--disabled:hover {
+  background: #ccc !important;
+  color: #616161 !important;
+  filter: brightness(100%);
+  cursor: default;
 }
 
 .container {

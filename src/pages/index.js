@@ -4,6 +4,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
 import SchoolClass from './SchoolClass';
+import Exam from './Exam';
 
 export {
   NotFound,
@@ -11,5 +12,6 @@ export {
   SignIn,
   SignUp,
   Dashboard,
-  SchoolClass
+  SchoolClass,
+  Exam
 };

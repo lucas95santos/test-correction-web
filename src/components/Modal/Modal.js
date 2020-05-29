@@ -21,8 +21,8 @@ export function Modal(props) {
         }
       case 'lg':
         return {
-          width: 700,
-          height: 500
+          width: 800,
+          height: '90vh',
         }
       default:
         return {

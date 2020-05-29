@@ -5,6 +5,9 @@ import DashboardTop from './DashboardTop';
 import ImageLoader from './ImageLoader';
 import AddNewClass from './AddNewClass';
 import AddNewStudent from './AddNewStudent';
+import AddNewExam from './AddNewExam';
+import Tabs from './Tabs';
+import Accordion from './Accordion';
 
 export {
   Navbar,
@@ -13,5 +16,8 @@ export {
   DashboardTop,
   ImageLoader,
   AddNewClass,
-  AddNewStudent
+  AddNewStudent,
+  AddNewExam,
+  Tabs,
+  Accordion
 };
