@@ -206,6 +206,7 @@ function Dashboard(props) {
       <AddNewExam
         open={addNewExamOpen}
         closeModal={() => setAddNewExamOpen(false)}
+        loadExams={loadExams}
       />
 
       <AddNewClass

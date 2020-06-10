@@ -14,7 +14,7 @@ import './AddNewExam.css';
 
 
 function AddNewExam(props) {
-  const { open, closeModal, auth } = props;
+  const { open, closeModal, auth, loadExams } = props;
   const [currentTab, setCurrentTab] = useState(0);
   const [exam, setExam] = useState({ id: 0, name: '' });
   const [examName, setExamName] = useState('');
@@ -310,7 +310,9 @@ function AddNewExam(props) {
         createQuestion(question);
       });
 
+      localStorage.removeItem(`ts-exam${exam.id}-questions`);
       closeModal();
+      loadExams();
       toast.success('Prova criada com sucesso!');
     }
   }
