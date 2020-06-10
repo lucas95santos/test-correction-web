@@ -3,7 +3,7 @@ import React from 'react';
 import './Tabs.css';
 
 export default function Tabs(props) {
-  const { selectors, content, activeTab, selectTab } = props;
+  const { selectors, content, activeTab } = props;
 
   return (
     <div className="tabs">

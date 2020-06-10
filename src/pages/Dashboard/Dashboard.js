@@ -22,6 +22,7 @@ import correctedExamSVG from '../../assets/images/svgs/corrected_exam.svg';
 import ReactTooltip from 'react-tooltip';
 // util
 import { getGradeColor } from '../../util/gradeColors';
+import formatDate from '../../util/formatDate';
 
 function Dashboard(props) {
   const { auth, schoolClasses, listAllRequest } = props;
@@ -29,10 +30,16 @@ function Dashboard(props) {
   const [profileDropdown, setProfileDropDown] = useState(false);
   const [notificationDropdown, setNotificationDropDown] = useState(false);
   const [addNewClassOpen, setAddNewClassOpen] = useState(false);
-  const [addNewExamOpen, setAddNewExamOpen] = useState(true);
+  const [addNewExamOpen, setAddNewExamOpen] = useState(false);
+
+  const [exams, setExams] = useState([]);
 
   useEffect(() => {
     listAllRequest(auth.token);
+  }, []);
+
+  useEffect(() => {
+    loadExams();
   }, []);
 
   function handleClickOut() {
@@ -80,6 +87,22 @@ function Dashboard(props) {
     return newFormat;
   }
 
+  async function loadExams() {
+    try {
+      const { data } = await api.get('/exams', {
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      });
+      setExams(data.exams.map(exam => ({
+        ...exam,
+        createdAt: formatDate(exam.createdAt),
+      })));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="dashboard" onClick={() => handleClickOut()}>
       <DashboardTop
@@ -100,38 +123,29 @@ function Dashboard(props) {
             <h1>Provas</h1>
           </div>
           <div className="card__body">
-            <div
-              className="card__item card__item--data"
-            >
-              <div className="data__content">
-                <div className="data__image">
-                  <img src={correctedExamSVG} alt="Exam" />
-                </div>
-                <div className="data__info">
-                  <p className="data__title">Prova 1</p>
-                  <p className="info__item"><span>Número de questões: </span> 10</p>
-                  <p className="info__item"><span>Alunos participantes: </span> 30</p>
-                  <p className="info__item"><span>Aplicado em: </span> 03/05/2020</p>
-                  <p className="info__item"><span>Situação: </span>Corrigida</p>
-                </div>
-              </div>
-            </div>
-            <div
-              className="card__item card__item--data"
-            >
-              <div className="data__content">
-                <div className="data__image">
-                  <img src={examSVG} alt="Exam" />
-                </div>
-                <div className="data__info">
-                  <p className="data__title">Prova 2</p>
-                  <p className="info__item"><span>Número de questões: </span> 10</p>
-                  <p className="info__item"><span>Alunos participantes: </span> 30</p>
-                  <p className="info__item"><span>Aplicado em: </span> 03/05/2020</p>
-                  <p className="info__item"><span>Situação: </span>Pendente</p>
+            {exams && exams.map(exam => (
+              <div
+                className="card__item card__item--data"
+                key={exam.id}
+              >
+                <div className="data__content">
+                  <div className="data__image">
+                    {
+                      exam.status === "PENDENTE" ?
+                      <img src={examSVG} alt="Exam" /> :
+                      <img src={correctedExamSVG} alt="Exam" />
+                    }
+                  </div>
+                  <div className="data__info">
+                    <p className="data__title">{exam.name}</p>
+                    <p className="info__item"><span>Número de questões: </span> {exam.questions_amount}</p>
+                    {/* <p className="info__item"><span>Alunos participantes: </span> 30</p> */}
+                    <p className="info__item"><span>Criado em: </span> {exam.createdAt}</p>
+                    <p className="info__item"><span>Situação: </span>{exam.status}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
             <div
               className="card__item card__item--add"
               data-tip="Adicionar nova prova"
@@ -150,7 +164,7 @@ function Dashboard(props) {
           <div className="card__body">
             {schoolClasses.map(schoolClass => {
               const [gradeYear, gradeEducation] = formatGrade(schoolClass.grade);
-              const createdAt = new Date(schoolClass.createdAt).toLocaleDateString();
+              const createdAt = formatDate(schoolClass.createdAt);
               let grade = schoolClass.grade.replace('é', 'e');
               grade = grade.replace(' ', '');
 

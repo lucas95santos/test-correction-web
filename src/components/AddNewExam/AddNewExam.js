@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+// services
+import api from '../../services/api';
 // components
 import Modal from '../Modal';
 import Tabs from '../Tabs';
 import Accordion from '../Accordion';
 // icons
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft, FiCheck } from 'react-icons/fi';
 // styles
 import './AddNewExam.css';
 
-export default function AddNewExam(props) {
-  const { open, closeModal } = props;
+
+function AddNewExam(props) {
+  const { open, closeModal, auth } = props;
   const [currentTab, setCurrentTab] = useState(0);
+  const [exam, setExam] = useState({ id: 0, name: '' });
+  const [examName, setExamName] = useState('');
   const [questionsAmount, setQuestionsAmount] = useState(0);
   const [description, setDescription] = useState([]);
   const [answersAmount, setAnswersAmount] = useState([]);
@@ -22,10 +29,10 @@ export default function AddNewExam(props) {
   // para monitorar a primeira etapa
   useEffect(() => {
     goToStep2();
-  }, [questionsAmount]);
+  }, [questionsAmount, examName]);
 
   function goToStep2() {
-    if (questionsAmount > 0) {
+    if (questionsAmount > 0 && examName !== '') {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -90,7 +97,7 @@ export default function AddNewExam(props) {
             type="radio"
             id={`${generateAnswerLetter(i)}OfQuestion${questionIndex + 1}`}
             name={`correctAnswerOfQuestion${questionIndex + 1}`}
-            value={generateAnswerLetter(i)}
+            value={i}
             onChange={e => onChangeCorrectAnswer(questionIndex, e.target.value)}
           />
           <label
@@ -127,6 +134,13 @@ export default function AddNewExam(props) {
           </p>
         </div>
         <div className="exam-definition__content">
+          <span>Nome da prova</span>
+          <input
+            type="text"
+            name="examName"
+            value={examName}
+            onChange={e => setExamName(e.target.value)}
+          />
           <span>Quantidade de questões</span>
           <input
             className="exam-definition__input"
@@ -141,7 +155,7 @@ export default function AddNewExam(props) {
           <button
             className={`btn-next ${disabled ? 'btn--disabled' : null}`}
             disabled={disabled}
-            onClick={() => setCurrentTab(currentTab + 1)}
+            onClick={() => createExam()}
           >
             Próximo
             <FiArrowRight size={16} />
@@ -211,12 +225,31 @@ export default function AddNewExam(props) {
 
     return (
       <div className="exam-fulfillment">
-        {accordions}
+        <div>
+          <div className="exam-fulfillment__exam-name">
+            <span>
+              <span className="exam-name__label">Nome da prova: </span>{exam && exam.name}
+            </span>
+            <span>
+              <span className="exam-name__label">Código da prova: </span>
+              {exam && formatExamId(exam.id)}
+            </span>
+          </div>
+          {accordions}
+        </div>
         <div className="exam-fulfillment__footer">
+          <button
+            className={`btn-prev ${disabled ? 'btn--disabled' : null}`}
+            disabled={disabled}
+            onClick={() => setCurrentTab(currentTab - 1)}
+          >
+            <FiArrowLeft size={16} />
+            Anterior
+          </button>
           <button
             className={`btn-next ${disabled ? 'btn--disabled' : null}`}
             disabled={disabled}
-            onClick={() => persistData()}
+            onClick={() => persistQuestions()}
           >
             Próximo
             <FiArrowRight size={16} />
@@ -226,30 +259,135 @@ export default function AddNewExam(props) {
     );
   }
 
-  function persistData() {
+  function formatExamId(examId) {
+    const result = examId / 1000;
+    return String(result.toFixed(3)).replace('.', '');
+  }
+
+  async function createExam() {
+    try {
+      const { data: createdExam } = await api.post('/exams', {
+        name: examName,
+        questions_amount: questionsAmount
+      }, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      });
+
+      setExam(createdExam);
+      setCurrentTab(currentTab + 1);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function persistQuestions() {
     const questions = [];
 
     for (let i = 0; i < questionsAmount; i++) {
       questions.push(
         {
-          id: `question${i+1}`,
+          id: `exam${exam.id}_question${i + 1}`,
           description: description[i],
           answersAmount: answersAmount[i],
-          answers: correctAnswerDescription[i],
+          answers: correctAnswerDescription[i] ? Object.values(correctAnswerDescription[i]) : null,
           correctAnswer: correctAnswer[i],
           score: questionValue[i]
         }
       );
     }
 
-    console.log(questions);
+    localStorage.setItem(`ts-exam${exam.id}-questions`, JSON.stringify(questions));
+    setCurrentTab(currentTab + 1);
+  }
 
-    // setCurrentTab(currentTab + 1);
+  function addQuestionsToExam() {
+    const questions = JSON.parse(localStorage.getItem(`ts-exam${exam.id}-questions`));
+
+    if (questions) {
+      questions.forEach(question => {
+        createQuestion(question);
+      });
+
+      closeModal();
+      toast.success('Prova criada com sucesso!');
+    }
+  }
+
+  async function createQuestion(question) {
+    const questionFormatted = {
+      id: question.id,
+      description: question.description,
+      answers_amount: parseInt(question.answersAmount),
+      answers: question.answers,
+      correct_answer: parseInt(question.correctAnswer),
+      score: question.score,
+      exam_id: exam.id
+    }
+
+    try {
+      await api.post('/questions', questionFormatted, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      });
+
+      console.log('Questão criada com sucesso');
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   function renderExamReview() {
+    const questions = JSON.parse(localStorage.getItem(`ts-exam${exam.id}-questions`));
+
+    if (!questions) return null;
+
     return (
-      <div className="exam-review"></div>
+      <div className="exam-review">
+        <h3 className="exam-review__title">Revise os dados da prova antes de finalizar</h3>
+        <div className="exam-review__info">
+          <span><span className="exam-name__label">Nome da prova: </span>{exam && exam.name}</span>
+          <span><span className="exam-name__label">Código da prova: </span>{exam && formatExamId(exam.id)}</span>
+        </div>
+        <div className="exam-review__questions">
+          {questions.map((question, index) => (
+            <div className="exam-review__question" key={index}>
+              <span className="exam-review__question__title">Questão {index + 1} - {question.score} ponto(s)</span>
+              <span>{question.description}</span>
+              <div className="exam-review__question__answers">
+                <span>Respostas</span>
+                {question.answers.map((answer, position) => (
+                  <span key={position} id="question__answer">
+                    <span className="alternative">{generateAnswerLetter(position).toLowerCase()}) </span>
+                    {answer}
+                    {
+                      question.correctAnswer == position ?
+                      <FiCheck size={18} color="#43a047" /> :
+                      ''
+                    }
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="exam-review__footer">
+          <button
+            className="btn-prev"
+            onClick={() => setCurrentTab(currentTab - 1)}
+          >
+            Corrigir preenchimento
+          </button>
+          <button
+            className="btn-next"
+            onClick={() => addQuestionsToExam()}
+          >
+            Finalizar
+          </button>
+        </div>
+      </div>
     );
   }
 
@@ -279,3 +417,9 @@ export default function AddNewExam(props) {
     </Modal>
   );
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(AddNewExam);
